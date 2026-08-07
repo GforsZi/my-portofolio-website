@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+  // Rust-free client: pure TypeScript, requires a driver adapter at runtime
+  // (see lib/prisma.ts). No native query engine needed.
+  engineType = "client"
+  // Lets `tsx` (used by prisma/seed.ts) resolve generated `.ts` imports.
+  importFileExtension = "ts"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ---- Portfolio models (start from these, extend as needed) ----
+
+model Profile {
+  id        String   @id @default(cuid())
+  name      String
+  headline  String
+  bio       String   @default("")
+  avatarUrl String?
+  email     String?
+  github    String?
+  linkedin  String?
+  twitter   String?
+  location  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  imageUrl    String?
+  url         String?
+  githubUrl   String?
+  tags        String[]
+  featured    Boolean  @default(false)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Skill {
+  id       String @id @default(cuid())
+  name     String
+  category String
+  order    Int    @default(0)
+}
+
+model Experience {
+  id          String   @id @default(cuid())
+  role        String
+  company     String
+  companyUrl  String?
+  location    String?
+  startDate   DateTime
+  endDate     DateTime?
+  current     Boolean  @default(false)
+  description String   @default("")
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
