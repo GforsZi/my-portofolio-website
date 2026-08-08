@@ -5,6 +5,7 @@ import { Footer } from "@/components/layouts/footer";
 import { Navbar } from "@/components/layouts/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { siteConfig } from "@/content/site";
+import FluidCursor from "@/components/sections/fluid-cursor"
 
 import "./globals.css";
 
@@ -36,7 +37,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Navbar />
-          <main className="flex flex-1 flex-col">{children}</main>
+            <FluidCursor/>
+            <main className="flex flex-1 flex-col">{children}</main>
           <Footer />
         </ThemeProvider>
       </body>

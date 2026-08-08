@@ -15,6 +15,11 @@ export function ProjectCard({ project }: { project: ProjectModel }) {
   return (
     <Card>
       <CardHeader>
+      <img
+        src="https://avatar.vercel.sh/shadcn1"
+        alt="Event cover"
+        className="relative z-20 aspect-video w-full object-cover brightness-60 grayscale dark:brightness-40 rounded"
+      />
         <CardTitle>{project.title}</CardTitle>
         <CardDescription>{project.description}</CardDescription>
       </CardHeader>
