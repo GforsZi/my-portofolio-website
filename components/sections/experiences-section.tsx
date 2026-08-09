@@ -23,10 +23,10 @@ export function ExperiencesSection({ experiences }: { experiences: ExperienceMod
 
   return (
     <section id="pengalaman" className="scroll-mt-20 flex flex-col gap-4">
-      <h2 className="font-heading text-lg font-medium">{siteConfig.sections.experiences}</h2>
+      <h2 data-animate="fade-up" className="font-heading text-lg font-medium">{siteConfig.sections.experiences}</h2>
       <ol className="flex flex-col gap-4">
         {experiences.map((experience) => (
-          <li key={experience.id}>
+          <li key={experience.id} data-animate="fade-up">
             <Card>
               <CardHeader>
                 <CardTitle>{experience.role}</CardTitle>

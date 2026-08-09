@@ -9,7 +9,7 @@ export function Hero({ profile }: { profile: ProfileModel }) {
         <AvatarFallback>{profile.name.charAt(0)}</AvatarFallback>
       </Avatar>
       <div className="flex flex-col gap-1">
-        <h1 className="font-heading text-3xl font-semibold tracking-tight">{profile.name}</h1>
+        <h1 data-animate="hero-line" className="font-heading text-3xl font-semibold tracking-tight">{profile.name}</h1>
         <p className="text-muted-foreground">{profile.headline}</p>
         {profile.location ? <p className="text-sm text-muted-foreground">{profile.location}</p> : null}
       </div>

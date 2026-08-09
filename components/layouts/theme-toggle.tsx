@@ -30,6 +30,17 @@ export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   const mounted = useMounted();
 
+  const handleThemeChange = (newTheme: string) => {
+    if (!document.startViewTransition) {
+      setTheme(newTheme);
+      return;
+    }
+
+    document.startViewTransition(() => {
+      setTheme(newTheme);
+    });
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -40,7 +51,10 @@ export function ThemeToggle() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         {themes.map(({ value, label, icon: Icon }) => (
-          <DropdownMenuItem key={value} onClick={() => setTheme(value)}>
+          <DropdownMenuItem 
+            key={value} 
+            onClick={() => handleThemeChange(value)}
+          >
             <Icon data-slot="theme-icon" />
             {label}
             {mounted && theme === value ? (

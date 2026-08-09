@@ -126,7 +126,10 @@ export default defineConfig({
     seed: "tsx prisma/seed.ts",
   },
   datasource: {
-    url: process.env.DATABASE_URL ?? "",  // "" agar `prisma generate` tetap jalan tanpa .env
+    // Prisma 7 menghapus `directUrl`. CLI (migrate / db push / studio) selalu
+    // memakai `url` ini, jadi arahkan ke DIRECT_URL (session pooler) bukan
+    // DATABASE_URL (transaction pooler). "" agar `prisma generate` tetap jalan tanpa .env.
+    url: process.env.DIRECT_URL ?? process.env.DATABASE_URL ?? "",
   },
 });
 ```
@@ -232,13 +235,17 @@ pnpm install
 cp .env.example .env
 ```
 
-Isi `DATABASE_URL` di `.env` dengan connection string dari **Supabase Dashboard → Project Settings → Database → Connection string**:
+Isi kedua connection string dari **Supabase Dashboard → Project Settings → Database → Connection string**:
 
 ```
-DATABASE_URL="postgresql://postgres.<project-ref>:<db-password>@aws-0-<region>.pooler.supabase.com:5432/postgres"
-```
+# Runtime aplikasi → transaction pooler (port 6543, ?pgbouncer=true).
+# Dipakai oleh driver adapter PrismaPg di lib/prisma.ts.
+DATABASE_URL="postgresql://postgres.<project-ref>:<db-password>@aws-0-<region>.pooler.supabase.com:6543/postgres?pgbouncer=true"
 
-> Gunakan port `5432` (session pooler) untuk umum; port `6543` (transaction pooler) jika butuh lebih banyak koneksi.
+# Prisma CLI / migrasi → session pooler (port 5432). Dipakai oleh prisma.config.ts
+# untuk `db:push` / `migrate` / `studio` (Prisma 7 tidak lagi punya `directUrl`).
+DIRECT_URL="postgresql://postgres.<project-ref>:<db-password>@aws-0-<region>.pooler.supabase.com:5432/postgres"
+```
 
 ### 4. Generate client & sinkronkan schema
 
@@ -331,6 +338,14 @@ export PRISMA_SCHEMA_ENGINE_BINARY="$HOME/.nix-profile/bin/schema-engine"
 Tambahkan `export` tersebut ke `~/.zshrc` agar permanen. Prisma 7 hanya butuh env var ini (tidak ada query/migration engine terpisah).
 
 > Client Prisma di project ini **tidak** butuh binary native (rust-free, `engineType = "client"`). Yang butuh `schema-engine` hanyalah CLI Prisma (`generate`, `migrate`, `db push`, `studio`).
+
+**Selain itu**, schema-engine di NixOS gagal mendeteksi OpenSSL (warning `Defaulting to openssl-1.1.x`). Perintah yang **menghubungi database** (`db push`, `migrate`, `db seed`, `studio`) akan gagal dengan `P1001: Can't reach database server` jika tidak diarahkan ke lib OpenSSL yang benar:
+
+```bash
+LD_LIBRARY_PATH="$(ldd "$PRISMA_SCHEMA_ENGINE_BINARY" | grep -o '/nix/store/[^ ]*openssl[^ ]*/lib' | head -1)" pnpm db:push
+```
+
+(`prisma generate` dan `prisma validate` tidak butuh ini karena tidak menghubungi database.)
 
 ---
 
