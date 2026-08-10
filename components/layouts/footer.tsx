@@ -11,13 +11,10 @@ const footerLinks = [
   { href: siteConfig.socials.twitter, label: "Twitter" },
 ];
 
-const email = "mohammadbayurizkii@gmail.com";
+const email = "givaldigumelarsetiawan@gmail.com";
 const marqueeRows = [
   [
     "Givaldi Gumelar Setiawan",
-    "Software Engineer",
-    "Full-stack Developer",
-    "Linux Enthusiast"
   ],
   [
     "PHP Python Golang Nodejs Typescript",
@@ -26,10 +23,9 @@ const marqueeRows = [
     "Neovim Opencode Git Bash Docker"
   ],
   [
-    "UX Research",
-    "Analytics Dashboards",
-    "Creative Development",
-    "Practical Problem Solving"
+    "Software Engineer",
+    "Full-stack Developer",
+    "Linux Enthusiast",
   ]
 ];
 const baseRows = [

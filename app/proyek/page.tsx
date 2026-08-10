@@ -1,7 +1,6 @@
 import Link from "next/link";
 
-import { ProjectGrid } from "@/components/sections/project-grid";
-import CardGlobeWhite from "@/components/sections/CardGlobeWhite";
+import { ProjectGrid } from "@/components/sections/ProjectGrid";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/content/site";
 import { getProjects } from "@/lib/data";
@@ -49,7 +48,6 @@ export default async function ProjectsPage({
       ) : null}
 
       <ProjectGrid projects={filtered} emptyMessage="Tidak ada proyek dengan filter ini." />
-      <CardGlobeWhite/>
     </div>
   );
 }

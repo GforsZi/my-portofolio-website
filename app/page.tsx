@@ -1,9 +1,9 @@
-import { About } from "@/components/sections/about";
-import { ExperiencesSection } from "@/components/sections/experiences-section";
-import { Hero } from "@/components/sections/hero";
-import { ProjectsSection } from "@/components/sections/projects-section";
-import { SkillsSection } from "@/components/sections/skills-section";
-import Lanyard from "@/components/lanyard/lanyard";
+import Experiences from "@/components/sections/Experiences";
+import { ProjectsSection } from "@/components/sections/ProjectsSection";
+import { SkillsSection } from "@/components/sections/SkillsSection";
+import Lanyard from "@/components/sections/Lanyard";
+import AboutCard from "@/components/sections/AboutCard";
+import Certifications from "@/components/sections/Certifications";
 import { Separator } from "@/components/ui/separator";
 import { getExperiences, getProfile, getProjects, getSkills } from "@/lib/data";
 
@@ -23,14 +23,15 @@ export default async function Home() {
         imageFit="cover"
         lanyardWidth={0.40}
       />
+      <SkillsSection skills={skills} />
       <div className="mx-auto flex w-full max-w-3xl flex-col gap-12 px-4 py-16 sm:px-8">
-        <Hero profile={profile} />
         <Separator />
-        <About profile={profile} />
+        <AboutCard/>
+        <Separator />
+        <Experiences name="pengalaman" />
         <ProjectsSection projects={projects} />
-        <SkillsSection skills={skills} />
-        <ExperiencesSection experiences={experiences} />
       </div>
+      <Certifications />
     </>
   );
 }

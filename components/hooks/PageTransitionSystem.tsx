@@ -190,8 +190,8 @@ export function PageTransitionSystem() {
 
       <div className="welcome-transition__content">
         <div className="welcome-transition__identity">
-          <h1>Mohammad Bayu Rizki</h1>
-          <p>Business Analysis & Digital Builds</p>
+          <h1>Givaldi Gumelar Setiawan</h1>
+          <p>Software Engineer</p>
         </div>
 
         <div className="welcome-transition__preview" aria-hidden="true">

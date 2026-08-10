@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { ProjectGrid } from "@/components/sections/project-grid";
+import { ProjectGrid } from "@/components/sections/ProjectGrid";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/content/site";
 import type { ProjectModel } from "@/generated/prisma/models";

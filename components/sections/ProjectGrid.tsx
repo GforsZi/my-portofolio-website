@@ -1,4 +1,4 @@
-import { ProjectCard } from "@/components/sections/project-card";
+import { ProjectCard } from "@/components/sections/ProjectCard";
 import type { ProjectModel } from "@/generated/prisma/models";
 
 export function ProjectGrid({
