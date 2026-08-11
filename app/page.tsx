@@ -1,5 +1,6 @@
 import Experiences from "@/components/sections/Experiences";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
+import Project from "@/components/sections/Project";
 import { SkillsSection } from "@/components/sections/SkillsSection";
 import Lanyard from "@/components/sections/Lanyard";
 import AboutCard from "@/components/sections/AboutCard";
@@ -29,8 +30,8 @@ export default async function Home() {
         <AboutCard/>
         <Separator />
         <Experiences name="pengalaman" />
-        <ProjectsSection projects={projects} />
       </div>
+        <Project projects={projects} />
       <Certifications />
     </>
   );

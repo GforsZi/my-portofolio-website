@@ -153,8 +153,8 @@ function Experiences({ name }: ExperiencesProps) {
 
   return (
     <section id={name} ref={sectionRef} className=' flex flex-col items-center justify-center pt-8 px-4 pb-16'>
-      <h2 className='study-heading mb-8 text-2xl sm:text-3xl font-semibold text-foreground'>
-        About my educational background
+      <h2  className='study-heading sm:text-7xl pb-10 text-5xl font-semibold text-center bg-gradient-to-b from-foreground to-muted-foreground bg-clip-text text-transparent leading-[100%] tracking-tighter'>
+        Experience
       </h2>
       <div className='w-full max-w-2xl'>
         {STUDY_ITEMS.map((item, i) => (
