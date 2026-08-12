@@ -3,9 +3,9 @@ import Link from "next/link";
 import { ProjectGrid } from "@/components/sections/ProjectGrid";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/content/site";
-import type { ProjectModel } from "@/generated/prisma/models";
+import type { ProjectWithSkills } from "@/content/site";
 
-export function ProjectsSection({ projects }: { projects: ProjectModel[] }) {
+export function ProjectsSection({ projects }: { projects: ProjectWithSkills[] }) {
   return (
     <section id="proyek" className="scroll-mt-20 flex flex-col gap-4">
       <div className="flex items-center justify-between">

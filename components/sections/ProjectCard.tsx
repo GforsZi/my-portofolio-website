@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 import { Badge } from "@/components/ui/badge";
 import {
@@ -9,25 +10,33 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import type { ProjectModel } from "@/generated/prisma/models";
+import type { ProjectWithSkills } from "@/content/site";
 
-export function ProjectCard({ project }: { project: ProjectModel }) {
+export function ProjectCard({ project }: { project: ProjectWithSkills }) {
   return (
     <Card>
       <CardHeader>
-      <img
-        src="https://avatar.vercel.sh/shadcn1"
-        alt="Event cover"
-        className="relative z-20 aspect-video w-full object-cover brightness-60 grayscale dark:brightness-40 rounded"
-      />
+      {project.thumbnail ? (
+        <Image
+          src={project.thumbnail}
+          alt={project.title}
+          width={800}
+          height={450}
+          className="relative z-20 aspect-video w-full object-cover brightness-60 grayscale dark:brightness-40 rounded"
+        />
+      ) : (
+        <div className="relative z-20 flex aspect-video w-full items-center justify-center rounded bg-muted font-heading text-4xl text-muted-foreground/40">
+          {project.title.charAt(0)}
+        </div>
+      )}
         <CardTitle>{project.title}</CardTitle>
         <CardDescription>{project.description}</CardDescription>
       </CardHeader>
-      {project.tags.length > 0 ? (
+      {project.skills.length > 0 ? (
         <CardContent className="flex flex-wrap gap-2">
-          {project.tags.map((tag) => (
-            <Badge key={tag} variant="secondary">
-              {tag}
+          {project.skills.map(({ skill }) => (
+            <Badge key={skill.id} variant="secondary">
+              {skill.name}
             </Badge>
           ))}
         </CardContent>

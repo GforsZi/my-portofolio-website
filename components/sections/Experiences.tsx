@@ -1,77 +1,59 @@
 'use client';
-import { ReactNode, useEffect, useRef } from 'react';
-import { GraduationCap } from 'lucide-react';
-import Image, { StaticImageData } from 'next/image';
+import { useEffect, useRef } from 'react';
+import { Briefcase } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-// import unn from '@/assets/images/unn.png';
-// import bachelor from '@/assets/images/3il.png';
-// import ccnb from '@/assets/images/ccnb.png';
+import type { ExperiencesModel } from '@/generated/prisma/models';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const STUDY_ITEMS: {
-  period: string;
-  position: string;
-  companyName: string;
-  logo?: StaticImageData;
-  myTasks: ReactNode | string;
-}[] = [
-  {
-    period: '2019 - 2022',
-    position: 'Lobachevsky University',
-    companyName: 'Nizhny Novgorod, Russia',
-    // logo: unn,
-    myTasks: 'Bachelor - Institute of Information Technology, Mathematics and Mechanics',
-  },
-  {
-    period: '2015 - 2016',
-    position: '3IL Limoges',
-    companyName: 'Limoges, France',
-    // logo: bachelor,
-    myTasks: 'Diploma in information system design',
-  },
-  {
-    period: '2013 - 2014',
-    position: 'New Brunswick Community College',
-    companyName: 'New Brunswick, Canada',
-    // logo: ccnb,
-    myTasks: 'DEC Analysis and Programming',
-  },
-];
+function formatPeriod(startDate: Date, endDate: Date | null, current: boolean): string {
+  const start = startDate.getFullYear();
+  const end = current || !endDate ? 'Sekarang' : endDate.getFullYear();
+  return start === end ? `${start}` : `${start} - ${end}`;
+}
 
 interface ExperiencesItemProps {
-  position: string;
-  companyName: string;
-  myTasks: ReactNode | string;
+  role: string;
+  company: string;
+  companyUrl: string | null;
+  location: string | null;
   period: string;
-  logo?: StaticImageData;
+  description: string;
   isLast?: boolean;
 }
 
 // Sub-component timeline item — inline karena cukup ringan untuk digabung
-function ExperiencesItem({ position, companyName, myTasks, period, logo, isLast }: ExperiencesItemProps) {
+function ExperiencesItem({ role, company, companyUrl, location, period, description, isLast }: ExperiencesItemProps) {
   return (
     <div className='study-item relative pl-10 pb-10 last:pb-0'>
       {!isLast && (
         <span className='study-line absolute left-[15px] top-8 bottom-0 w-px bg-border' />
       )}
       <span className='absolute left-0 top-0 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground overflow-hidden ring-4 ring-background'>
-        {logo ? (
-          <Image src={logo} alt={`${companyName} logo`} width={32} height={32} className='object-contain' />
-        ) : (
-          <GraduationCap className='h-4 w-4' />
-        )}
+        <Briefcase className='h-4 w-4' />
       </span>
       <span className='mb-1 inline-block text-xs font-medium text-muted-foreground'>
         {period}
       </span>
       <div className='rounded-lg border border-border bg-card p-4 text-left shadow-sm'>
-        <h3 className='text-lg font-semibold text-foreground'>{position}</h3>
-        <h4 className='mt-1 flex items-center text-sm italic font-medium text-muted-foreground before:mr-2 before:block before:h-px before:w-4 before:bg-primary'>
-          {companyName}
+        <h3 className='text-lg font-semibold text-foreground'>{role}</h3>
+        <h4 className='mt-1 flex items-center gap-2 text-sm italic font-medium text-muted-foreground before:mr-2 before:block before:h-px before:w-4 before:bg-primary'>
+          {companyUrl ? (
+            <a
+              href={companyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className='transition-colors hover:text-foreground'
+            >
+              {company}
+            </a>
+          ) : (
+            company
+          )}
+          {location ? <span className='text-xs'>{location}</span> : null}
         </h4>
-        <div className='mt-3 text-sm text-muted-foreground'>{myTasks}</div>
+        <div className='mt-3 text-sm text-muted-foreground'>{description}</div>
       </div>
     </div>
   );
@@ -79,9 +61,10 @@ function ExperiencesItem({ position, companyName, myTasks, period, logo, isLast 
 
 interface ExperiencesProps {
   name: string;
+  experiences: ExperiencesModel[];
 }
 
-function Experiences({ name }: ExperiencesProps) {
+function Experiences({ name, experiences }: ExperiencesProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -151,17 +134,24 @@ function Experiences({ name }: ExperiencesProps) {
     return () => ctx.revert();
   }, []);
 
+  if (experiences.length === 0) return null;
+
   return (
     <section id={name} ref={sectionRef} className=' flex flex-col items-center justify-center pt-8 px-4 pb-16'>
       <h2  className='study-heading sm:text-7xl pb-10 text-5xl font-semibold text-center bg-gradient-to-b from-foreground to-muted-foreground bg-clip-text text-transparent leading-[100%] tracking-tighter'>
         Experience
       </h2>
       <div className='w-full max-w-2xl'>
-        {STUDY_ITEMS.map((item, i) => (
+        {experiences.map((experience, i) => (
           <ExperiencesItem
-            key={item.position}
-            {...item}
-            isLast={i === STUDY_ITEMS.length - 1}
+            key={experience.id}
+            role={experience.role}
+            company={experience.company}
+            companyUrl={experience.companyUrl}
+            location={experience.location}
+            period={formatPeriod(experience.startDate, experience.endDate, experience.current)}
+            description={experience.description}
+            isLast={i === experiences.length - 1}
           />
         ))}
       </div>

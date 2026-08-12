@@ -1,6 +1,6 @@
 "use client";
 
-import type { SkillModel } from "@/generated/prisma/models";
+import type { SkillWithCategory } from "@/content/site";
 import LogoLoop, { type LogoItem } from "@/components/ui/logo-loop";
 import { getSkillIcon } from "@/components/ui/skill-icons";
 
@@ -17,7 +17,7 @@ const toLogoItems = (names: string[]): LogoItem[] =>
       }),
     }));
 
-export function SkillsSection({ skills }: { skills: SkillModel[] }) {
+export function SkillsSection({ skills }: { skills: SkillWithCategory[] }) {
   if (skills.length === 0) return null;
 
   const logos = toLogoItems(skills.map((skill) => skill.name));

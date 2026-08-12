@@ -14,11 +14,11 @@ import HorizontalScroll, {
   type HorizontalScrollDirection,
 } from "@/components/ui/horizontal-scroll";
 import { siteConfig } from "@/content/site";
-import type { ProjectModel } from "@/generated/prisma/models";
+import type { ProjectWithSkills } from "@/content/site";
 import { cn } from "@/lib/utils";
 
 type ProjectSlideProps = {
-  project: ProjectModel;
+  project: ProjectWithSkills;
   direction: HorizontalScrollDirection;
 };
 
@@ -33,9 +33,9 @@ function ProjectSlide({ project, direction }: ProjectSlideProps) {
           mirrored && "md:order-2"
         )}
       >
-        {project.imageUrl ? (
+        {project.thumbnail ? (
           <Image
-            src={project.imageUrl}
+            src={project.thumbnail}
             alt={project.title}
             fill
             sizes="(max-width: 768px) 85vw, 40vw"
@@ -53,11 +53,11 @@ function ProjectSlide({ project, direction }: ProjectSlideProps) {
           mirrored && "md:order-1"
         )}
       >
-        {project.tags.length > 0 ? (
+        {project.skills.length > 0 ? (
           <div className="flex flex-wrap gap-2">
-            {project.tags.map((tag) => (
-              <Badge key={tag} variant="secondary">
-                {tag}
+            {project.skills.map(({ skill }) => (
+              <Badge key={skill.id} variant="secondary">
+                {skill.name}
               </Badge>
             ))}
           </div>
@@ -95,12 +95,12 @@ function ProjectSlide({ project, direction }: ProjectSlideProps) {
   );
 }
 
-export default function Project({ projects }: { projects: ProjectModel[] }) {
+export default function Project({ projects }: { projects: ProjectWithSkills[] }) {
   return (
     <HorizontalScroll
-      id="proyek"
+      id="projects"
       direction="right"
-      heading={siteConfig.sections.projects}
+      heading={"Projects"}
     >
       {(direction) =>
         projects.map((project) => (

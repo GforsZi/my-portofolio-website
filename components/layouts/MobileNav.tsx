@@ -2,11 +2,11 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { createPortal } from "react-dom";
 import { AtSign, Briefcase, GitBranch } from "lucide-react";
 
-import { siteConfig } from "@/content/site";
+import { getSetting } from "@/content/site";
+import type { AppSettingsModel } from "@/generated/prisma/models";
 import { cn } from "@/lib/utils";
 
 const socialIcons = {
@@ -23,10 +23,15 @@ function useMounted() {
   );
 }
 
-export function MobileNav() {
+export function MobileNav({ settings }: { settings: AppSettingsModel[] }) {
   const [open, setOpen] = React.useState(false);
   const mounted = useMounted();
-  const pathname = usePathname();
+
+  const socials = {
+    github: getSetting(settings, "social", "github") ?? "#",
+    linkedin: getSetting(settings, "social", "linkedin") ?? "#",
+    twitter: getSetting(settings, "social", "twitter") ?? "#",
+  } as const;
 
   React.useEffect(() => {
     if (!open) return;
@@ -90,41 +95,10 @@ export function MobileNav() {
 
               <div
                 className={cn(
-                  "relative flex h-full flex-col justify-between px-6 pb-8 pt-10 transition-all duration-500 ease-out",
+                  "relative flex h-full flex-col justify-center px-6 pb-8 pt-10 transition-all duration-500 ease-out",
                   open ? "translate-y-0 opacity-100" : "-translate-y-6 opacity-0",
                 )}
               >
-                <nav className="space-y-1">
-                  {siteConfig.navLinks.map((link, i) => {
-                    const active = link.href.startsWith("/#")
-                      ? pathname === "/"
-                      : pathname === link.href;
-                    return (
-                      <Link
-                        key={link.href}
-                        href={link.href}
-                        onClick={() => setOpen(false)}
-                        style={{ transitionDelay: open ? `${i * 60}ms` : "0ms" }}
-                        className={cn(
-                          "group flex items-center justify-between border-b border-border/50 py-4 transition-all duration-300",
-                          active ? "text-secondary" : "text-foreground",
-                          open ? "translate-x-0 opacity-100" : "-translate-x-4 opacity-0",
-                        )}
-                      >
-                        <span className="flex items-baseline gap-3">
-                          <span className="font-mono text-xs text-muted-foreground">
-                            {String(i + 1).padStart(2, "0")}
-                          </span>
-                          <span className="font-heading text-2xl font-semibold tracking-tight transition-transform duration-300 group-hover:translate-x-1">
-                            {link.label}
-                          </span>
-                        </span>
-                        <span className="size-1.5 rounded-full bg-secondary/60 transition-all duration-300 group-hover:scale-150 group-hover:bg-secondary" />
-                      </Link>
-                    );
-                  })}
-                </nav>
-
                 <div
                   className={cn(
                     "transition-all duration-500",
@@ -134,23 +108,23 @@ export function MobileNav() {
                   <p className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground">
                     Koneksi
                   </p>
-                  <div className="flex gap-3">
-                    {(Object.keys(socialIcons) as Array<keyof typeof socialIcons>).map((key) => {
-                      const Icon = socialIcons[key];
-                      return (
-                        <Link
-                          key={key}
-                          href={siteConfig.socials[key]}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={key}
-                          className="flex size-10 items-center justify-center rounded-lg border border-border/60 text-muted-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-secondary/60 hover:text-secondary hover:shadow-[0_0_20px_rgba(21,145,220,0.35)]"
-                        >
-                          <Icon className="size-4" />
-                        </Link>
-                      );
-                    })}
-                  </div>
+                <div className="flex gap-3">
+                  {(Object.keys(socialIcons) as Array<keyof typeof socialIcons>).map((key) => {
+                    const Icon = socialIcons[key];
+                    return (
+                      <Link
+                        key={key}
+                        href={socials[key]}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={key}
+                        className="flex size-10 items-center justify-center rounded-lg border border-border/60 text-muted-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-secondary/60 hover:text-secondary hover:shadow-[0_0_20px_rgba(21,145,220,0.35)]"
+                      >
+                        <Icon className="size-4" />
+                      </Link>
+                    );
+                  })}
+                </div>
                 </div>
               </div>
             </div>,

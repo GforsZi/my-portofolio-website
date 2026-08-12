@@ -2,14 +2,9 @@
 
 import Link from "next/link";
 
-import { siteConfig } from "@/content/site";
+import { getSetting } from "@/content/site";
+import type { AppSettingsModel } from "@/generated/prisma/models";
 import { useEffect, useRef } from "react";
-
-const footerLinks = [
-  { href: siteConfig.socials.github, label: "GitHub" },
-  { href: siteConfig.socials.linkedin, label: "LinkedIn" },
-  { href: siteConfig.socials.twitter, label: "Twitter" },
-];
 
 const email = "givaldigumelarsetiawan@gmail.com";
 const marqueeRows = [
@@ -43,7 +38,20 @@ const baseRows = [
   }
 ];
 
-export function Footer() {
+export function Footer({ settings }: { settings: AppSettingsModel[] }) {
+  const siteName = getSetting(settings, "site", "name") ?? "Portofolio";
+  const socials = {
+    github: getSetting(settings, "social", "github") ?? "#",
+    linkedin: getSetting(settings, "social", "linkedin") ?? "#",
+    twitter: getSetting(settings, "social", "twitter") ?? "#",
+  };
+
+  const footerLinks = [
+    { href: socials.github, label: "GitHub" },
+    { href: socials.linkedin, label: "LinkedIn" },
+    { href: socials.twitter, label: "Twitter" },
+  ];
+
   const viewportRefs = useRef<Array<HTMLElement | null>>([]);
   const trackRefs = useRef<Array<HTMLElement | null>>([]);
 
@@ -170,7 +178,7 @@ export function Footer() {
     {/* </footer> */}
       <div className="grid min-w-0 content-between gap-16">
       <div className="mx-auto flex w-full max-w-3xl flex-col items-center justify-between gap-2 px-4 py-6 text-sm text-muted-foreground sm:flex-row sm:px-8">
-        <p data-footer-link>© {new Date().getFullYear()} {siteConfig.name}</p>
+        <p data-footer-link>© {new Date().getFullYear()} {siteName}</p>
         <div className="flex items-center gap-4">
           {footerLinks.map((link) => (
             <Link data-footer-link key={link.label} href={link.href} target="_blank" rel="noopener noreferrer">

@@ -1,14 +1,22 @@
 import {
+  fallbackCertifications,
   fallbackExperiences,
-  fallbackProfile,
+  fallbackNavigations,
   fallbackProjects,
+  fallbackSettings,
+  fallbackSkillCategories,
   fallbackSkills,
 } from "@/content/site";
 import type {
-  ExperienceModel,
-  ProfileModel,
-  ProjectModel,
-  SkillModel,
+  ProjectWithSkills,
+  SkillWithCategory,
+} from "@/content/site";
+import type {
+  AppSettingsModel,
+  CertificationsModel,
+  ExperiencesModel,
+  PageNavigationsModel,
+  SkillCategoriesModel,
 } from "@/generated/prisma/models";
 import { prisma } from "@/lib/prisma";
 
@@ -19,30 +27,40 @@ import { prisma } from "@/lib/prisma";
 // Saat database sudah aktif, cukup beri data di tabel terkait dan fungsi ini
 // akan mengembalikan data asli dari database.
 
-export async function getProfile(): Promise<ProfileModel> {
+export async function getSettings(): Promise<AppSettingsModel[]> {
   try {
-    const profile = await prisma.profile.findFirst();
-    return profile ?? fallbackProfile;
+    const settings = await prisma.appSettings.findMany();
+    return settings.length > 0 ? settings : fallbackSettings;
   } catch {
-    return fallbackProfile;
+    return fallbackSettings;
   }
 }
 
-export async function getProjects(): Promise<ProjectModel[]> {
+export async function getNavigations(): Promise<PageNavigationsModel[]> {
   try {
-    const projects = await prisma.project.findMany({
-      orderBy: [{ featured: "desc" }, { order: "asc" }],
+    const navigations = await prisma.pageNavigations.findMany({
+      orderBy: { position: "asc" },
     });
-    return projects.length > 0 ? projects : fallbackProjects;
+    return navigations.length > 0 ? navigations : fallbackNavigations;
   } catch {
-    return fallbackProjects;
+    return fallbackNavigations;
   }
 }
 
-export async function getSkills(): Promise<SkillModel[]> {
+export async function getSkillCategories(): Promise<SkillCategoriesModel[]> {
   try {
-    const skills = await prisma.skill.findMany({
+    const categories = await prisma.skillCategories.findMany();
+    return categories.length > 0 ? categories : fallbackSkillCategories;
+  } catch {
+    return fallbackSkillCategories;
+  }
+}
+
+export async function getSkills(): Promise<SkillWithCategory[]> {
+  try {
+    const skills = await prisma.skills.findMany({
       orderBy: { order: "asc" },
+      include: { category: true },
     });
     return skills.length > 0 ? skills : fallbackSkills;
   } catch {
@@ -50,13 +68,36 @@ export async function getSkills(): Promise<SkillModel[]> {
   }
 }
 
-export async function getExperiences(): Promise<ExperienceModel[]> {
+export async function getProjects(): Promise<ProjectWithSkills[]> {
   try {
-    const experiences = await prisma.experience.findMany({
+    const projects = await prisma.projects.findMany({
+      orderBy: [{ featured: "desc" }, { order: "asc" }],
+      include: { skills: { include: { skill: true } } },
+    });
+    return projects.length > 0 ? projects : fallbackProjects;
+  } catch {
+    return fallbackProjects;
+  }
+}
+
+export async function getExperiences(): Promise<ExperiencesModel[]> {
+  try {
+    const experiences = await prisma.experiences.findMany({
       orderBy: [{ current: "desc" }, { startDate: "desc" }],
     });
     return experiences.length > 0 ? experiences : fallbackExperiences;
   } catch {
     return fallbackExperiences;
+  }
+}
+
+export async function getCertifications(): Promise<CertificationsModel[]> {
+  try {
+    const certifications = await prisma.certifications.findMany({
+      orderBy: { order: "asc" },
+    });
+    return certifications.length > 0 ? certifications : fallbackCertifications;
+  } catch {
+    return fallbackCertifications;
   }
 }

@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
-import { Footer } from "@/components/layouts/footer";
-import { Navbar } from "@/components/layouts/navbar";
+import { Footer } from "@/components/layouts/Footer";
+import { Navbar } from "@/components/layouts/Navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { siteConfig } from "@/content/site";
+import { getSettings } from "@/lib/data";
 import { ClientProviders } from "@/components/layouts/ClientProviders";
 
 import "./globals.css";
@@ -27,7 +28,9 @@ export const metadata: Metadata = {
   description: siteConfig.description,
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const settings = await getSettings();
+
   return (
     <html
       lang="id"
@@ -36,10 +39,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <Navbar />
+          <Navbar settings={settings} />
           <ClientProviders/>
             <main className="flex flex-1 flex-col">{children}</main>
-          <Footer />
+          <Footer settings={settings} />
         </ThemeProvider>
       </body>
     </html>

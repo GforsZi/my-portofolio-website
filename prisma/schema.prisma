@@ -1,9 +1,9 @@
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider            = "prisma-client"
+  output              = "../generated/prisma"
   // Rust-free client: pure TypeScript, requires a driver adapter at runtime
   // (see lib/prisma.ts). No native query engine needed.
-  engineType = "client"
+  engineType          = "client"
   // Lets `tsx` (used by prisma/seed.ts) resolve generated `.ts` imports.
   importFileExtension = "ts"
 }
@@ -14,52 +14,147 @@ datasource db {
 
 // ---- Portfolio models (start from these, extend as needed) ----
 
-model Profile {
+model AppSettings {
   id        String   @id @default(cuid())
-  name      String
-  headline  String
-  bio       String   @default("")
-  avatarUrl String?
-  email     String?
-  github    String?
-  linkedin  String?
-  twitter   String?
-  location  String?
+  type      String
+  key       String
+  title     String
+  value     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([type, key])
+}
+
+enum LinkType {
+  link
+  dropdown
+}
+
+model PageNavigations {
+  id        String   @id @default(cuid())
+  label     String
+  position  Int?
+  type      LinkType
+  data      Json?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-model Project {
+enum ArticleStatus {
+  publikasi
+  draf
+  arsip
+}
+
+model Articles {
+  id        String        @id @default(cuid())
+  slug      String        @unique
+  title     String
+  content   String
+  thumbnail String?
+  status    ArticleStatus @default(draf)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  articleCategories CategoriesArticles[]
+}
+
+model ArticleCategories {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  articles CategoriesArticles[]
+}
+
+model CategoriesArticles {
+  id                String   @id @default(cuid())
+  articleId         String   @map("article_id")
+  articleCategoryId String   @map("article_category_id")
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  article         Articles          @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  articleCategory ArticleCategories @relation(fields: [articleCategoryId], references: [id], onDelete: Cascade)
+
+  @@map("categories_articles")
+}
+
+model SkillCategories {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  skills Skills[]
+}
+
+model Skills {
+  id              String   @id @default(cuid())
+  name            String
+  slug            String   @unique
+  order           Int?
+  skillCategoryId String   @map("skill_category_id")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  category SkillCategories @relation(fields: [skillCategoryId], references: [id], onDelete: Cascade)
+
+  projects ProjectSkills[]
+}
+
+model Projects {
   id          String   @id @default(cuid())
   title       String
   description String
-  imageUrl    String?
+  thumbnail   String?
   url         String?
   githubUrl   String?
-  tags        String[]
   featured    Boolean  @default(false)
   order       Int      @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  skills ProjectSkills[]
 }
 
-model Skill {
-  id       String @id @default(cuid())
-  name     String
-  category String
-  order    Int    @default(0)
+model ProjectSkills {
+  id        String   @id @default(cuid())
+  projectId String   @map("project_id")
+  skillId   String   @map("skill_id")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  project Projects @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  skill   Skills   @relation(fields: [skillId], references: [id], onDelete: Cascade)
+
+  @@map("project_skills")
 }
 
-model Experience {
-  id          String   @id @default(cuid())
+model Experiences {
+  id          String    @id @default(cuid())
   role        String
   company     String
   companyUrl  String?
   location    String?
   startDate   DateTime
   endDate     DateTime?
-  current     Boolean  @default(false)
-  description String   @default("")
+  current     Boolean   @default(false)
+  description String    @default("")
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Certifications {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  thumbnail   String?
+  url         String?
+  releaseYear Int
   order       Int      @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

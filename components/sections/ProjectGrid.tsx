@@ -1,11 +1,11 @@
 import { ProjectCard } from "@/components/sections/ProjectCard";
-import type { ProjectModel } from "@/generated/prisma/models";
+import type { ProjectWithSkills } from "@/content/site";
 
 export function ProjectGrid({
   projects,
   emptyMessage = "Belum ada proyek.",
 }: {
-  projects: ProjectModel[];
+  projects: ProjectWithSkills[];
   emptyMessage?: string;
 }) {
   if (projects.length === 0) {

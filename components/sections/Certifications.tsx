@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import {
   Card,
@@ -11,65 +12,10 @@ import {
 import HorizontalScroll, {
   type HorizontalScrollDirection,
 } from "@/components/ui/horizontal-scroll";
-
-type Certification = {
-  title: string;
-  issuer: string;
-  year: string;
-  description: string;
-  image: string;
-};
-
-const certifications: Certification[] = [
-  {
-    title: "Full Stack Web Developer",
-    issuer: "Dicoding Indonesia",
-    year: "2025",
-    description:
-      "Membangun aplikasi web lengkap dari frontend hingga backend menggunakan JavaScript, REST API, dan database.",
-    image:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&q=80",
-  },
-  {
-    title: "Frontend Web Developer Expert",
-    issuer: "Dicoding Indonesia",
-    year: "2024",
-    description:
-      "Menguasai Progressive Web Apps, aksesibilitas, dan best practice performa untuk web modern.",
-    image:
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80",
-  },
-  {
-    title: "Cloud Architect",
-    issuer: "Google Cloud",
-    year: "2024",
-    description:
-      "Merancang infrastruktur cloud yang scalable, aman, dan hemat biaya di Google Cloud Platform.",
-    image:
-      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&q=80",
-  },
-  {
-    title: "AWS Certified Developer",
-    issuer: "Amazon Web Services",
-    year: "2023",
-    description:
-      "Mengembangkan dan men-deploy aplikasi serverless menggunakan layanan inti AWS.",
-    image:
-      "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1200&q=80",
-  },
-  {
-    title: "JavaScript Algorithms",
-    issuer: "freeCodeCamp",
-    year: "2023",
-    description:
-      "Menyelesaikan struktur data dan algoritma klasik untuk memecahkan masalah pemrograman.",
-    image:
-      "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1200&q=80",
-  },
-];
+import type { CertificationsModel } from "@/generated/prisma/models";
 
 type CertificationCardProps = {
-  cert: Certification;
+  cert: CertificationsModel;
   direction: HorizontalScrollDirection;
 };
 
@@ -84,13 +30,19 @@ function CertificationCard({ cert, direction }: CertificationCardProps) {
           mirrored && "md:order-2"
         )}
       >
-        <Image
-          src={cert.image}
-          alt={cert.title}
-          fill
-          sizes="(max-width: 768px) 85vw, 40vw"
-          className="object-cover grayscale transition duration-500 hover:grayscale-0"
-        />
+        {cert.thumbnail ? (
+          <Image
+            src={cert.thumbnail}
+            alt={cert.title}
+            fill
+            sizes="(max-width: 768px) 85vw, 40vw"
+            className="object-contain p-4 grayscale transition duration-500 hover:grayscale-0"
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center font-heading text-6xl text-muted-foreground/40">
+            {cert.title.charAt(0)}
+          </div>
+        )}
       </div>
       <CardContent
         className={cn(
@@ -101,26 +53,37 @@ function CertificationCard({ cert, direction }: CertificationCardProps) {
         <div className="flex items-center justify-between gap-4">
           <span className="font-mono text-sm text-muted-foreground" />
           <span className="rounded-full border px-3 py-1 font-mono text-xs text-muted-foreground">
-            {cert.year}
+            {cert.releaseYear}
           </span>
         </div>
         <CardTitle className="text-3xl font-semibold tracking-tight sm:text-4xl">
           {cert.title}
         </CardTitle>
-        <p className="text-sm font-medium text-primary">{cert.issuer}</p>
         <CardDescription>{cert.description}</CardDescription>
+        {cert.url ? (
+          <Link
+            href={cert.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-primary underline-offset-4 hover:underline"
+          >
+            Lihat sertifikat
+          </Link>
+        ) : null}
       </CardContent>
     </Card>
   );
 }
 
-export default function Certifications() {
+export default function Certifications({ certifications }: { certifications: CertificationsModel[] }) {
+  if (certifications.length === 0) return null;
+
   return (
     <HorizontalScroll id="sertifikat" heading="Certifications">
       {(direction) =>
         certifications.map((cert) => (
           <CertificationCard
-            key={cert.title}
+            key={cert.id}
             cert={cert}
             direction={direction}
           />
