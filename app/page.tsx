@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Experiences from "@/components/sections/Experiences";
 import Project from "@/components/sections/Project";
 import { SkillsSection } from "@/components/sections/SkillsSection";
@@ -6,6 +7,11 @@ import AboutCard from "@/components/sections/AboutCard";
 import Certifications from "@/components/sections/Certifications";
 import { Separator } from "@/components/ui/separator";
 import { getCertifications, getExperiences, getProjects, getSettings, getSkills } from "@/lib/data";
+
+export const metadata: Metadata = {
+  title: "Givaldi Gumelar Setiawan — Portofolio Web Developer",
+  description: "Portofolio Givaldi Gumelar Setiawan — Web Developer (Backend & Full-stack) dengan fokus pada Laravel, Filament, Next.js, dan React.",
+};
 
 export default async function Home() {
   const [settings, projects, skills, experiences, certifications] = await Promise.all([

@@ -36,7 +36,7 @@ function CertificationCard({ cert, direction }: CertificationCardProps) {
             alt={cert.title}
             fill
             sizes="(max-width: 768px) 85vw, 40vw"
-            className="object-contain p-4 grayscale transition duration-500 hover:grayscale-0"
+            className="object-cover p-4 grayscale transition duration-500 hover:grayscale-0"
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center font-heading text-6xl text-muted-foreground/40">

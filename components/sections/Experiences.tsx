@@ -53,7 +53,7 @@ function ExperiencesItem({ role, company, companyUrl, location, period, descript
           )}
           {location ? <span className='text-xs'>{location}</span> : null}
         </h4>
-        <div className='mt-3 text-sm text-muted-foreground'>{description}</div>
+        <div className='mt-3 text-sm whitespace-pre-line text-muted-foreground'>{description}</div>
       </div>
     </div>
   );
@@ -139,7 +139,7 @@ function Experiences({ name, experiences }: ExperiencesProps) {
   return (
     <section id={name} ref={sectionRef} className=' flex flex-col items-center justify-center pt-8 px-4 pb-16'>
       <h2  className='study-heading sm:text-7xl pb-10 text-5xl font-semibold text-center bg-gradient-to-b from-foreground to-muted-foreground bg-clip-text text-transparent leading-[100%] tracking-tighter'>
-        Experience
+        Experiences
       </h2>
       <div className='w-full max-w-2xl'>
         {experiences.map((experience, i) => (

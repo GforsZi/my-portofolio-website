@@ -43,13 +43,13 @@ export function Footer({ settings }: { settings: AppSettingsModel[] }) {
   const socials = {
     github: getSetting(settings, "social", "github") ?? "#",
     linkedin: getSetting(settings, "social", "linkedin") ?? "#",
-    twitter: getSetting(settings, "social", "twitter") ?? "#",
+    instagram: getSetting(settings, "social", "instagram") ?? "#",
   };
 
   const footerLinks = [
     { href: socials.github, label: "GitHub" },
     { href: socials.linkedin, label: "LinkedIn" },
-    { href: socials.twitter, label: "Twitter" },
+    { href: socials.instagram, label: "Instagram" },
   ];
 
   const viewportRefs = useRef<Array<HTMLElement | null>>([]);

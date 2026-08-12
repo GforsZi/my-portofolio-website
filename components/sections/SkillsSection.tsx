@@ -1,32 +1,83 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import type { SkillWithCategory } from "@/content/site";
 import LogoLoop, { type LogoItem } from "@/components/ui/logo-loop";
-import { getSkillIcon } from "@/components/ui/skill-icons";
 
-const upLogos = ["Livewire", "React", "Vue.js"];
-const downLogos = ["Livewire", "React", "Vue.js"];
+// Marquee atas: bahasa pemrograman, framework, library, database.
+const UP_CATEGORIES = [
+  "skill-category-bahasa",
+  "skill-category-framework",
+  "skill-category-library",
+  "skill-category-database",
+];
 
-const toLogoItems = (names: string[]): LogoItem[] =>
-  names
-    .map((name) => getSkillIcon(name))
-    .filter((renderIcon): renderIcon is NonNullable<typeof renderIcon> => Boolean(renderIcon))
-    .map((renderIcon) => ({
-      node: renderIcon({
-        className: "h-[var(--logoloop-logoHeight)] w-auto",
-      }),
-    }));
+// Marquee bawah: tools, OS, CLI utility.
+const DOWN_CATEGORIES = [
+  "skill-category-tools",
+  "skill-category-os",
+  "skill-category-cli",
+];
+
+const toLogoItems = (skills: SkillWithCategory[]): LogoItem[] =>
+  skills.map((skill) => ({
+    src: skill.imgUrl,
+    alt: skill.name,
+    title: skill.name,
+    width: 24,
+    height: 24,
+  }));
+
+// SVG dimuat sebagai mask dan diisi warna currentColor sehingga mengikuti
+// warna teks tema (light/dark) tanpa perlu mengubah file SVG-nya.
+function SkillLogo({ src, alt }: { src: string; alt: string }) {
+  const style: CSSProperties = {
+    display: "inline-block",
+    width: "var(--logoloop-logoHeight)",
+    height: "var(--logoloop-logoHeight)",
+    backgroundColor: "currentColor",
+    WebkitMaskImage: `url(${src})`,
+    maskImage: `url(${src})`,
+    WebkitMaskSize: "contain",
+    maskSize: "contain",
+    WebkitMaskRepeat: "no-repeat",
+    maskRepeat: "no-repeat",
+    WebkitMaskPosition: "center",
+    maskPosition: "center",
+  };
+
+  return (
+    <span
+      role="img"
+      aria-label={alt}
+      title={alt}
+      style={style}
+      className="pointer-events-none [-webkit-user-drag:none] transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/item:scale-120"
+    />
+  );
+}
+
+const renderSkillLogo = (item: LogoItem) => {
+  const src = (item as { src?: string }).src ?? "";
+  const alt = (item as { alt?: string }).alt ?? "";
+  return <SkillLogo src={src} alt={alt} />;
+};
 
 export function SkillsSection({ skills }: { skills: SkillWithCategory[] }) {
-  if (skills.length === 0) return null;
+  const upLogos = toLogoItems(
+    skills.filter((skill) => UP_CATEGORIES.includes(skill.skillCategoryId)),
+  );
+  const downLogos = toLogoItems(
+    skills.filter((skill) => DOWN_CATEGORIES.includes(skill.skillCategoryId)),
+  );
 
-  const logos = toLogoItems(skills.map((skill) => skill.name));
+  if (upLogos.length === 0 && downLogos.length === 0) return null;
 
   return (
     <section id="keahlian">
       <div style={{ height: "75px", position: "relative", overflow: "hidden" }}>
         <LogoLoop
-          logos={logos.length > 0 ? logos : toLogoItems(upLogos)}
+          logos={upLogos}
           speed={100}
           direction="left"
           logoHeight={60}
@@ -35,12 +86,13 @@ export function SkillsSection({ skills }: { skills: SkillWithCategory[] }) {
           scaleOnHover
           fadeOut
           fadeOutColor="var(--background)"
-          ariaLabel="Technology partners"
+          renderItem={renderSkillLogo}
+          ariaLabel="Programming languages, frameworks, libraries, and databases"
         />
       </div>
       <div style={{ height: "75px", position: "relative", overflow: "hidden" }}>
         <LogoLoop
-          logos={logos.length > 0 ? logos : toLogoItems(downLogos)}
+          logos={downLogos}
           speed={100}
           direction="right"
           logoHeight={60}
@@ -49,10 +101,10 @@ export function SkillsSection({ skills }: { skills: SkillWithCategory[] }) {
           scaleOnHover
           fadeOut
           fadeOutColor="var(--background)"
-          ariaLabel="Technology partners"
+          renderItem={renderSkillLogo}
+          ariaLabel="Tools, operating systems, and CLI utilities"
         />
       </div>
-
     </section>
   );
 }

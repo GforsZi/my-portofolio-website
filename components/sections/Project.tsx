@@ -13,7 +13,6 @@ import {
 import HorizontalScroll, {
   type HorizontalScrollDirection,
 } from "@/components/ui/horizontal-scroll";
-import { siteConfig } from "@/content/site";
 import type { ProjectWithSkills } from "@/content/site";
 import { cn } from "@/lib/utils";
 
@@ -66,30 +65,30 @@ function ProjectSlide({ project, direction }: ProjectSlideProps) {
           {project.title}
         </CardTitle>
         <CardDescription>{project.description}</CardDescription>
-        {project.url || project.githubUrl ? (
-          <div className="flex items-center gap-4 pt-2">
-            {project.url ? (
-              <Link
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-primary underline-offset-4 hover:underline"
-              >
-                Kunjungi
-              </Link>
-            ) : null}
-            {project.githubUrl ? (
-              <Link
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-muted-foreground underline-offset-4 hover:underline"
-              >
-                GitHub
-              </Link>
-            ) : null}
-          </div>
-        ) : null}
+        {/* {project.url || project.githubUrl ? ( */}
+        {/*   <div className="flex items-center gap-4 pt-2"> */}
+        {/*     {project.url ? ( */}
+        {/*       <Link */}
+        {/*         href={project.url} */}
+        {/*         target="_blank" */}
+        {/*         rel="noopener noreferrer" */}
+        {/*         className="text-sm text-primary underline-offset-4 hover:underline" */}
+        {/*       > */}
+        {/*         Kunjungi */}
+        {/*       </Link> */}
+        {/*     ) : null} */}
+        {/*     {project.githubUrl ? ( */}
+        {/*       <Link */}
+        {/*         href={project.githubUrl} */}
+        {/*         target="_blank" */}
+        {/*         rel="noopener noreferrer" */}
+        {/*         className="text-sm text-muted-foreground underline-offset-4 hover:underline" */}
+        {/*       > */}
+        {/*         GitHub */}
+        {/*       </Link> */}
+        {/*     ) : null} */}
+        {/*   </div> */}
+        {/* ) : null} */}
       </CardContent>
     </Card>
   );

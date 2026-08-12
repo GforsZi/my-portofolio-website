@@ -9,8 +9,26 @@ import type {
   SkillsModel,
 } from "@/generated/prisma/models";
 
+export const siteUrl = "https://portofolio.vercel.app";
+export const siteAuthor = "Givaldi Gumelar Setiawan";
+export const siteKeywords = [
+  "portofolio",
+  "portfolio",
+  "web developer",
+  "backend developer",
+  "full-stack developer",
+  "software engineer",
+  "laravel",
+  "filament",
+  "livewire",
+  "next.js",
+  "react",
+  "typescript",
+  "givaldi gumelar setiawan",
+];
+
 export const siteConfig = {
-  name: "Portofolio",
+  name: "Portofolio (eary access)",
   description: "Personal portfolio built with Next.js, Tailwind CSS, shadcn/ui, and Prisma.",
   navLinks: [
     { href: "/proyek", label: "Proyek" },
@@ -21,7 +39,7 @@ export const siteConfig = {
   socials: {
     github: "https://github.com/username",
     linkedin: "https://www.linkedin.com/in/username",
-    twitter: "https://x.com/username",
+    instagram: "https://x.com/username",
     email: "mailto:hello@example.com",
   },
   sections: {
@@ -50,16 +68,16 @@ export function getSetting(
 }
 
 export const fallbackSettings: AppSettingsModel[] = [
-  { id: "app-setting-site-name", type: "site", key: "name", title: "Nama Situs", value: "Portofolio (eary access)", createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
+  { id: "app-setting-site-name", type: "site", key: "name", title: "Nama Situs", value: "Portofolio", createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
   { id: "app-setting-site-description", type: "site", key: "description", title: "Deskripsi Situs", value: "Personal portfolio built with Next.js, Tailwind CSS, shadcn/ui, and Prisma.", createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
-  { id: "app-setting-social-github", type: "social", key: "github", title: "GitHub", value: "https://github.com/username", createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
-  { id: "app-setting-social-linkedin", type: "social", key: "linkedin", title: "LinkedIn", value: "https://www.linkedin.com/in/username", createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
-  { id: "app-setting-social-twitter", type: "social", key: "twitter", title: "Twitter", value: "https://x.com/username", createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
+  { id: "app-setting-social-github", type: "social", key: "github", title: "GitHub", value: "https://github.com/GforsZi", createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
+  { id: "app-setting-social-linkedin", type: "social", key: "linkedin", title: "LinkedIn", value: "https://www.linkedin.com/in/givaldi-gumelar-setiawan-4a988a356/", createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
+  { id: "app-setting-social-instagram", type: "social", key: "instagram", title: "Instagram", value: "https://www.instagram.com/givaldigumelarsetiawan", createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
   { id: "app-setting-social-email", type: "social", key: "email", title: "Email", value: "mailto:hello@example.com", createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
-  { id: "app-setting-profile-name", type: "profile", key: "name", title: "Nama", value: "Nama Anda", createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
-  { id: "app-setting-profile-headline", type: "profile", key: "headline", title: "Headline", value: "Software Engineer", createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
-  { id: "app-setting-profile-bio", type: "profile", key: "bio", title: "Bio", value: "Saya adalah software engineer yang fokus membangun aplikasi web modern menggunakan Next.js, React, dan TypeScript. Saya suka merancang produk yang cepat, aksesibel, dan mudah dirawat.", createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
-  { id: "app-setting-profile-location", type: "profile", key: "location", title: "Lokasi", value: "Jakarta, Indonesia", createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
+  { id: "app-setting-profile-name", type: "profile", key: "name", title: "Nama", value: "Givaldi Gumelar Setiawan", createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
+  { id: "app-setting-profile-headline", type: "profile", key: "headline", title: "Headline", value: "Full-stack Engineer", createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
+  { id: "app-setting-profile-bio", type: "profile", key: "bio", title: "Bio", value: "Full-stack Developer dengan fokus pada ekosistem monolith berbasis Laravel, nextjs, Fastapi, dan pengembangan API berbasis Python, Nodejs, Golang. Berpengalaman menangani siklus pengembangan end-to-end dari perancangan database, integrasi API pihak ketiga (Midtrans, Fonnte, OAuth2), hingga deployment  untuk lebih dari 6 project klien berbeda selama masa magang dan freelance. Terbiasa membangun sistem dengan role-based access control dan arsitektur yang dapat direplikasi untuk kebutuhan multi-klien.", createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
+  { id: "app-setting-profile-location", type: "profile", key: "location", title: "Lokasi", value: "Bandung, Indonesia", createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
 ];
 
 export const fallbackNavigations: PageNavigationsModel[] = [
@@ -70,24 +88,86 @@ export const fallbackNavigations: PageNavigationsModel[] = [
 ];
 
 export const fallbackSkillCategories: SkillCategoriesModel[] = [
-  { id: "skill-category-bahasa", name: "Bahasa", createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
+  { id: "skill-category-bahasa", name: "Bahasa Pemrograman", createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
   { id: "skill-category-framework", name: "Framework", createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
-  { id: "skill-category-styling", name: "Styling", createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
+  { id: "skill-category-library", name: "Library", createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
   { id: "skill-category-database", name: "Database", createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
-  { id: "skill-category-platform", name: "Platform", createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
+  { id: "skill-category-tools", name: "Tools", createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
+  { id: "skill-category-os", name: "OS", createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
+  { id: "skill-category-cli", name: "CLI Utility", createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
 ];
 
 export type SkillWithCategory = SkillsModel & { category: SkillCategoriesModel };
 
-export const fallbackSkills: SkillWithCategory[] = [
-  { id: "skill-typescript", name: "TypeScript", slug: "typescript", order: 0, skillCategoryId: "skill-category-bahasa", category: fallbackSkillCategories[0], createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
-  { id: "skill-next-js", name: "Next.js", slug: "next.js", order: 1, skillCategoryId: "skill-category-framework", category: fallbackSkillCategories[1], createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
-  { id: "skill-react", name: "React", slug: "react", order: 2, skillCategoryId: "skill-category-framework", category: fallbackSkillCategories[1], createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
-  { id: "skill-tailwind-css", name: "Tailwind CSS", slug: "tailwind-css", order: 3, skillCategoryId: "skill-category-styling", category: fallbackSkillCategories[2], createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
-  { id: "skill-prisma", name: "Prisma", slug: "prisma", order: 4, skillCategoryId: "skill-category-database", category: fallbackSkillCategories[3], createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
-  { id: "skill-postgresql", name: "PostgreSQL", slug: "postgresql", order: 5, skillCategoryId: "skill-category-database", category: fallbackSkillCategories[3], createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
-  { id: "skill-supabase", name: "Supabase", slug: "supabase", order: 6, skillCategoryId: "skill-category-platform", category: fallbackSkillCategories[4], createdAt: ts("2025-01-01"), updatedAt: ts("2025-01-01") },
+// Daftar skill mengikuti nama file di public/img/skill/*.svg.
+const skillDefs: { file: string; name: string; categoryId: string }[] = [
+  // Bahasa Pemrograman
+  { file: "css", name: "CSS", categoryId: "skill-category-bahasa" },
+  { file: "go", name: "Go", categoryId: "skill-category-bahasa" },
+  { file: "html5", name: "HTML5", categoryId: "skill-category-bahasa" },
+  { file: "javascript", name: "JavaScript", categoryId: "skill-category-bahasa" },
+  { file: "php", name: "PHP", categoryId: "skill-category-bahasa" },
+  { file: "python", name: "Python", categoryId: "skill-category-bahasa" },
+  { file: "typescript", name: "TypeScript", categoryId: "skill-category-bahasa" },
+  // Framework
+  { file: "express", name: "Express", categoryId: "skill-category-framework" },
+  { file: "fastapi", name: "FastAPI", categoryId: "skill-category-framework" },
+  { file: "filament", name: "Filament", categoryId: "skill-category-framework" },
+  { file: "gin", name: "Gin", categoryId: "skill-category-framework" },
+  { file: "laravel", name: "Laravel", categoryId: "skill-category-framework" },
+  { file: "livewire", name: "Livewire", categoryId: "skill-category-framework" },
+  { file: "nestjs", name: "NestJS", categoryId: "skill-category-framework" },
+  { file: "nextdotjs", name: "Next.js", categoryId: "skill-category-framework" },
+  { file: "nodedotjs", name: "Node.js", categoryId: "skill-category-framework" },
+  { file: "tailwindcss", name: "Tailwind CSS", categoryId: "skill-category-framework" },
+  { file: "vuedotjs", name: "Vue.js", categoryId: "skill-category-framework" },
+  // Library
+  { file: "gsap", name: "GSAP", categoryId: "skill-category-library" },
+  { file: "prisma", name: "Prisma", categoryId: "skill-category-library" },
+  { file: "react", name: "React", categoryId: "skill-category-library" },
+  { file: "shadcnui", name: "shadcn/ui", categoryId: "skill-category-library" },
+  { file: "sqlalchemy", name: "SQLAlchemy", categoryId: "skill-category-library" },
+  // Database
+  { file: "firebase", name: "Firebase", categoryId: "skill-category-database" },
+  { file: "mysql", name: "MySQL", categoryId: "skill-category-database" },
+  { file: "supabase", name: "Supabase", categoryId: "skill-category-database" },
+  // Tools
+  { file: "cpanel", name: "cPanel", categoryId: "skill-category-tools" },
+  { file: "docker", name: "Docker", categoryId: "skill-category-tools" },
+  { file: "github", name: "GitHub", categoryId: "skill-category-tools" },
+  { file: "opencode", name: "opencode", categoryId: "skill-category-tools" },
+  { file: "openrouter", name: "OpenRouter", categoryId: "skill-category-tools" },
+  { file: "postman", name: "Postman", categoryId: "skill-category-tools" },
+  { file: "vercel", name: "Vercel", categoryId: "skill-category-tools" },
+  { file: "vite", name: "Vite", categoryId: "skill-category-tools" },
+  // OS
+  { file: "hyprland", name: "Hyprland", categoryId: "skill-category-os" },
+  { file: "linux", name: "Linux", categoryId: "skill-category-os" },
+  { file: "nixos", name: "NixOS", categoryId: "skill-category-os" },
+  // CLI Utility
+  { file: "git", name: "Git", categoryId: "skill-category-cli" },
+  { file: "gnubash", name: "GNU Bash", categoryId: "skill-category-cli" },
+  { file: "neovim", name: "Neovim", categoryId: "skill-category-cli" },
+  { file: "tmux", name: "tmux", categoryId: "skill-category-cli" },
 ];
+
+const skillCategoryById = new Map(
+  fallbackSkillCategories.map((category) => [category.id, category]),
+);
+
+export const fallbackSkills: SkillWithCategory[] = skillDefs.map(
+  ({ file, name, categoryId }, order) => ({
+    id: `skill-${file}`,
+    name,
+    slug: file,
+    order,
+    imgUrl: `/img/skill/${file}.svg`,
+    skillCategoryId: categoryId,
+    category: skillCategoryById.get(categoryId)!,
+    createdAt: ts("2025-01-01"),
+    updatedAt: ts("2025-01-01"),
+  }),
+);
 
 export type ProjectWithSkills = ProjectsModel & {
   skills: (ProjectSkillsModel & { skill: SkillsModel })[];
@@ -108,81 +188,116 @@ function projectSkill(projectId: string, skill: SkillsModel): ProjectSkillsModel
 
 export const fallbackProjects: ProjectWithSkills[] = [
   {
-    id: "project-dashboard-analitik",
-    title: "Dashboard Analitik",
-    description: "Dashboard analitik real-time untuk memantau metrik produk dengan visualisasi data interaktif.",
-    thumbnail: "/img/certification/serti_mp_pkl-1.webp",
-    url: "https://example.com/dashboard",
-    githubUrl: "https://github.com/username/dashboard-analitik",
+    id: "project-custom-app",
+    title: "Custom App",
+    description:
+      "custom-app adalah solusi enterprise siap pakai yang dibangun dengan ekosistem Laravel/Vue modern. Fondasinya modular sehingga dapat disesuaikan dengan kebutuhan bisnis — mulai dari alur kerja khusus, konfigurasi multi-tenant, hingga antarmuka administrasi — tanpa mengorbankan kemudahan perawatan.",
+    thumbnail: "/img/project/custom_app.webp",
+    url: "https://github.com/username/custom-app",
+    githubUrl: "https://github.com/username/custom-app",
     featured: true,
     order: 0,
     createdAt: ts("2025-02-01"),
     updatedAt: ts("2025-02-01"),
     skills: [
-      projectSkill("project-dashboard-analitik", skillBySlug.get("next.js")!),
-      projectSkill("project-dashboard-analitik", skillBySlug.get("prisma")!),
-      projectSkill("project-dashboard-analitik", skillBySlug.get("supabase")!),
+      projectSkill("project-custom-app", skillBySlug.get("laravel")!),
+      projectSkill("project-custom-app", skillBySlug.get("vuedotjs")!),
+      projectSkill("project-custom-app", skillBySlug.get("php")!),
+      projectSkill("project-custom-app", skillBySlug.get("mysql")!),
     ],
   },
   {
-    id: "project-platform-belajar-online",
-    title: "Platform Belajar Online",
-    description: "Platform kursus online dengan sistem manajemen materi, kuis, dan sertifikat.",
-    thumbnail: "/img/certification/penghargaan_porto.webp",
-    url: "https://example.com/belajar",
-    githubUrl: "https://github.com/username/platform-belajar",
+    id: "project-matcha-aquatics",
+    title: "Matcha Aquatics",
+    description:
+      "Matcha Aquatics adalah aplikasi e-catalog modern untuk pengalaman belanja perlengkapan akuatik yang efisien dan interaktif. Dilengkapi integrasi pembayaran Midtrans, perhitungan ongkir RajaOngkir, autentikasi Google OAuth2, serta antarmuka responsif dengan React.js, Tailwind CSS, dan shadcn/ui.",
+    thumbnail: "/img/project/matcha_aquatics.webp",
+    url: "https://github.com/username/matcha-aquatics",
+    githubUrl: "https://github.com/username/matcha-aquatics",
     featured: false,
     order: 1,
     createdAt: ts("2025-03-15"),
     updatedAt: ts("2025-03-15"),
     skills: [
-      projectSkill("project-platform-belajar-online", skillBySlug.get("next.js")!),
-      projectSkill("project-platform-belajar-online", skillBySlug.get("tailwind-css")!),
-      projectSkill("project-platform-belajar-online", skillBySlug.get("postgresql")!),
+      projectSkill("project-matcha-aquatics", skillBySlug.get("react")!),
+      projectSkill("project-matcha-aquatics", skillBySlug.get("tailwindcss")!),
+      projectSkill("project-matcha-aquatics", skillBySlug.get("shadcnui")!),
     ],
   },
   {
-    id: "project-aplikasi-catatan",
-    title: "Aplikasi Catatan",
-    description: "Aplikasi catatan berbasis keyboard dengan sinkronisasi lintas perangkat.",
-    thumbnail: "/img/certification/penghargaan_jr_web_dev.webp",
-    url: null,
-    githubUrl: "https://github.com/username/aplikasi-catatan",
+    id: "project-petra",
+    title: "Petra",
+    description:
+      "Sistem manajemen perpustakaan dengan role-based access control, pengelolaan label salinan buku, kartu anggota, dan ekspor laporan seluruh data di database. Peminjaman buku dikelola otomatis dengan notifikasi pengingat pengembalian lewat integrasi Fonnte API, sehingga menghilangkan human-error dalam pencatatan buku.",
+    thumbnail: "/img/project/petra.webp",
+    url: "https://github.com/username/petra",
+    githubUrl: "https://github.com/username/petra",
     featured: false,
     order: 2,
     createdAt: ts("2025-04-10"),
     updatedAt: ts("2025-04-10"),
     skills: [
-      projectSkill("project-aplikasi-catatan", skillBySlug.get("react")!),
-      projectSkill("project-aplikasi-catatan", skillBySlug.get("typescript")!),
+      projectSkill("project-petra", skillBySlug.get("php")!),
+      projectSkill("project-petra", skillBySlug.get("laravel")!),
+      projectSkill("project-petra", skillBySlug.get("mysql")!),
     ],
   },
 ];
 
 export const fallbackExperiences: ExperiencesModel[] = [
   {
-    id: "experience-frontend-engineer",
-    role: "Frontend Engineer",
-    company: "PT Teknologi Maju",
-    companyUrl: "https://example.com",
-    location: "Jakarta, Indonesia",
-    startDate: new Date("2024-01-01"),
-    endDate: null,
-    current: true,
-    description: "Mengembangkan fitur-fitur frontend untuk produk SaaS, meningkatkan performa halaman hingga 40%, dan membimbing developer junior.",
+    id: "experience-inovindo-digital-media",
+    role: "Backend Web Developer Internship",
+    company: "PT. Inovindo Digital Media",
+    companyUrl: null,
+    location: "Bandung",
+    startDate: new Date("2026-01-01"),
+    endDate: new Date("2026-04-30"),
+    current: false,
+    description:
+      "Mempercepat siklus pengembangan software hingga 35% dan meningkatkan efisiensi waktu hingga 20% dengan merancang schema database yang mendukung replikasi untuk berbagai architecture project.\nMembangun sistem backend dan page builder kustom menggunakan Laravel & Filament untuk 4 perusahaan klien berbeda, dengan architecture dashboard admin yang dapat direplikasi lintas project.\nMerancang struktur frontend agar mudah terintegrasi penuh dengan Filament builder, memastikan setiap halaman kustom tetap SEO-optimized dan responsif.",
     createdAt: ts("2025-01-01"),
     updatedAt: ts("2025-01-01"),
   },
   {
-    id: "experience-web-developer",
-    role: "Web Developer",
-    company: "Startup Digital",
+    id: "experience-properti-nusa",
+    role: "Full-stack Developer Freelancer",
+    company: "Properti Nusa",
     companyUrl: null,
-    location: "Bandung, Indonesia",
-    startDate: new Date("2022-06-01"),
-    endDate: new Date("2023-12-31"),
+    location: "Bandung",
+    startDate: new Date("2026-01-01"),
+    endDate: new Date("2026-02-28"),
     current: false,
-    description: "Membangun website dan aplikasi internal untuk klien, dari perancangan hingga deployment.",
+    description:
+      "Memimpin pengembangan platform properti secara end-to-end dari perencanaan architecture, development software menggunakan Laravel, Livewire, dan Tailwind, hingga deployment ke hosting menggunakan C-panel.\nMenyelesaikan permasalahan fragmentasi data dengan membuat platform yang menyimpan semua data yang tersebar pada satu database, serta dilengkapi keamanan modern dengan menerapkan perlindungan CSRF, enkripsi password, dan role-based access untuk membedakan hak akses admin dan pengguna.",
+    createdAt: ts("2025-01-01"),
+    updatedAt: ts("2025-01-01"),
+  },
+  {
+    id: "experience-smk-mahaputra",
+    role: "Backend Web Developer Internship",
+    company: "SMK Mahaputra",
+    companyUrl: null,
+    location: "Bandung",
+    startDate: new Date("2025-09-01"),
+    endDate: new Date("2026-01-31"),
+    current: false,
+    description:
+      "Memberikan solusi atas kasus banyaknya buku yang hilang, serta memperbarui sistem manajemen perpustakaan yang tradisional ke sistem manajemen digital yang dilengkapi pencatatan otomatis dan dapat diekspor ke PDF dan Excel.\nMerancang sistem manajemen perpustakaan yang mendukung fitur role-based access control, pengelolaan label salinan buku, pengelolaan kartu anggota perpustakaan, pengelolaan ekspor laporan pada seluruh data di database.\nMengimplementasikan sistem peminjaman buku yang terkelola secara otomatis dengan notifikasi pengingat tanggal pengembalian otomatis (integrasi Fonnte API), serta 100% menghilangkan human-error dalam sistem pencatatan buku.",
+    createdAt: ts("2025-01-01"),
+    updatedAt: ts("2025-01-01"),
+  },
+  {
+    id: "experience-matcha-aquatics",
+    role: "Full-stack Developer Volunteers",
+    company: "Matcha Aquatics",
+    companyUrl: null,
+    location: "Bandung",
+    startDate: new Date("2025-10-01"),
+    endDate: new Date("2025-12-31"),
+    current: false,
+    description:
+      "Mengembangkan platform point of sale dengan kemampuan menerima multi-order serta mendukung pembayaran otomatis melalui integrasi Midtrans API, dan autentikasi via Google OAuth2 untuk kenyamanan pengguna.\nMembuat tampilan modern dan responsif menggunakan React + Shadcn, serta membuat struktur component yang terorganisir, dengan management state yang optimal, dan menggunakan TypeScript untuk type-safe agar pengelolaan data yang aman.",
     createdAt: ts("2025-01-01"),
     updatedAt: ts("2025-01-01"),
   },

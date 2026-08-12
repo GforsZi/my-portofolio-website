@@ -117,13 +117,15 @@ async function main() {
     });
   }
 
-  // ---- SkillCategories (dari fallbackSkills.category) ----
+  // ---- SkillCategories (dari fallbackSkillCategories) ----
   const skillCategories = [
-    { id: "skill-category-bahasa", name: "Bahasa" },
+    { id: "skill-category-bahasa", name: "Bahasa Pemrograman" },
     { id: "skill-category-framework", name: "Framework" },
-    { id: "skill-category-styling", name: "Styling" },
+    { id: "skill-category-library", name: "Library" },
     { id: "skill-category-database", name: "Database" },
-    { id: "skill-category-platform", name: "Platform" },
+    { id: "skill-category-tools", name: "Tools" },
+    { id: "skill-category-os", name: "OS" },
+    { id: "skill-category-cli", name: "CLI Utility" },
   ];
 
   for (const category of skillCategories) {
@@ -134,15 +136,56 @@ async function main() {
     });
   }
 
-  // ---- Skills (dari fallbackSkills) ----
+  // ---- Skills (dari public/img/skill/*.svg, disamakan dengan fallbackSkills) ----
   const skills = [
-    { name: "TypeScript", categoryId: "skill-category-bahasa" },
-    { name: "Next.js", categoryId: "skill-category-framework" },
-    { name: "React", categoryId: "skill-category-framework" },
-    { name: "Tailwind CSS", categoryId: "skill-category-styling" },
-    { name: "Prisma", categoryId: "skill-category-database" },
-    { name: "PostgreSQL", categoryId: "skill-category-database" },
-    { name: "Supabase", categoryId: "skill-category-platform" },
+    // Bahasa Pemrograman
+    { name: "CSS", imgUrl: "/img/skill/css.svg", categoryId: "skill-category-bahasa" },
+    { name: "Go", imgUrl: "/img/skill/go.svg", categoryId: "skill-category-bahasa" },
+    { name: "HTML5", imgUrl: "/img/skill/html5.svg", categoryId: "skill-category-bahasa" },
+    { name: "JavaScript", imgUrl: "/img/skill/javascript.svg", categoryId: "skill-category-bahasa" },
+    { name: "PHP", imgUrl: "/img/skill/php.svg", categoryId: "skill-category-bahasa" },
+    { name: "Python", imgUrl: "/img/skill/python.svg", categoryId: "skill-category-bahasa" },
+    { name: "TypeScript", imgUrl: "/img/skill/typescript.svg", categoryId: "skill-category-bahasa" },
+    // Framework
+    { name: "Express", imgUrl: "/img/skill/express.svg", categoryId: "skill-category-framework" },
+    { name: "FastAPI", imgUrl: "/img/skill/fastapi.svg", categoryId: "skill-category-framework" },
+    { name: "Filament", imgUrl: "/img/skill/filament.svg", categoryId: "skill-category-framework" },
+    { name: "Gin", imgUrl: "/img/skill/gin.svg", categoryId: "skill-category-framework" },
+    { name: "Laravel", imgUrl: "/img/skill/laravel.svg", categoryId: "skill-category-framework" },
+    { name: "Livewire", imgUrl: "/img/skill/livewire.svg", categoryId: "skill-category-framework" },
+    { name: "NestJS", imgUrl: "/img/skill/nestjs.svg", categoryId: "skill-category-framework" },
+    { name: "Next.js", imgUrl: "/img/skill/nextdotjs.svg", categoryId: "skill-category-framework" },
+    { name: "Node.js", imgUrl: "/img/skill/nodedotjs.svg", categoryId: "skill-category-framework" },
+    { name: "Tailwind CSS", imgUrl: "/img/skill/tailwindcss.svg", categoryId: "skill-category-framework" },
+    { name: "Vue.js", imgUrl: "/img/skill/vuedotjs.svg", categoryId: "skill-category-framework" },
+    // Library
+    { name: "GSAP", imgUrl: "/img/skill/gsap.svg", categoryId: "skill-category-library" },
+    { name: "Prisma", imgUrl: "/img/skill/prisma.svg", categoryId: "skill-category-library" },
+    { name: "React", imgUrl: "/img/skill/react.svg", categoryId: "skill-category-library" },
+    { name: "shadcn/ui", imgUrl: "/img/skill/shadcnui.svg", categoryId: "skill-category-library" },
+    { name: "SQLAlchemy", imgUrl: "/img/skill/sqlalchemy.svg", categoryId: "skill-category-library" },
+    // Database
+    { name: "Firebase", imgUrl: "/img/skill/firebase.svg", categoryId: "skill-category-database" },
+    { name: "MySQL", imgUrl: "/img/skill/mysql.svg", categoryId: "skill-category-database" },
+    { name: "Supabase", imgUrl: "/img/skill/supabase.svg", categoryId: "skill-category-database" },
+    // Tools
+    { name: "cPanel", imgUrl: "/img/skill/cpanel.svg", categoryId: "skill-category-tools" },
+    { name: "Docker", imgUrl: "/img/skill/docker.svg", categoryId: "skill-category-tools" },
+    { name: "GitHub", imgUrl: "/img/skill/github.svg", categoryId: "skill-category-tools" },
+    { name: "opencode", imgUrl: "/img/skill/opencode.svg", categoryId: "skill-category-tools" },
+    { name: "OpenRouter", imgUrl: "/img/skill/openrouter.svg", categoryId: "skill-category-tools" },
+    { name: "Postman", imgUrl: "/img/skill/postman.svg", categoryId: "skill-category-tools" },
+    { name: "Vercel", imgUrl: "/img/skill/vercel.svg", categoryId: "skill-category-tools" },
+    { name: "Vite", imgUrl: "/img/skill/vite.svg", categoryId: "skill-category-tools" },
+    // OS
+    { name: "Hyprland", imgUrl: "/img/skill/hyprland.svg", categoryId: "skill-category-os" },
+    { name: "Linux", imgUrl: "/img/skill/linux.svg", categoryId: "skill-category-os" },
+    { name: "NixOS", imgUrl: "/img/skill/nixos.svg", categoryId: "skill-category-os" },
+    // CLI Utility
+    { name: "Git", imgUrl: "/img/skill/git.svg", categoryId: "skill-category-cli" },
+    { name: "GNU Bash", imgUrl: "/img/skill/gnubash.svg", categoryId: "skill-category-cli" },
+    { name: "Neovim", imgUrl: "/img/skill/neovim.svg", categoryId: "skill-category-cli" },
+    { name: "tmux", imgUrl: "/img/skill/tmux.svg", categoryId: "skill-category-cli" },
   ];
 
   for (const [index, skill] of skills.entries()) {
@@ -154,6 +197,7 @@ async function main() {
         name: skill.name,
         slug: slugify(skill.name),
         order: index,
+        imgUrl: skill.imgUrl,
         skillCategoryId: skill.categoryId,
       },
     });
@@ -162,40 +206,42 @@ async function main() {
   // ---- Projects + ProjectSkills (dari fallbackProjects) ----
   const projects = [
     {
-      title: "Dashboard Analitik",
-      description: "Dashboard analitik real-time untuk memantau metrik produk dengan visualisasi data interaktif.",
-      thumbnail: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80",
-      url: "https://example.com/dashboard",
-      githubUrl: "https://github.com/username/dashboard-analitik",
+      id: "project-custom-app",
+      title: "Custom App",
+      description: "custom-app adalah solusi enterprise siap pakai yang dibangun dengan ekosistem Laravel/Vue modern. Fondasinya modular sehingga dapat disesuaikan dengan kebutuhan bisnis — mulai dari alur kerja khusus, konfigurasi multi-tenant, hingga antarmuka administrasi — tanpa mengorbankan kemudahan perawatan.",
+      thumbnail: "/img/project/custom_app.webp",
+      url: "https://github.com/username/custom-app",
+      githubUrl: "https://github.com/username/custom-app",
       featured: true,
       order: 0,
-      skills: ["Next.js", "Prisma", "Supabase", "Recharts"],
+      skills: ["Laravel", "Vue.js", "PHP", "MySQL"],
     },
     {
-      title: "Platform Belajar Online",
-      description: "Platform kursus online dengan sistem manajemen materi, kuis, dan sertifikat.",
-      thumbnail: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=1200&q=80",
-      url: "https://example.com/belajar",
-      githubUrl: "https://github.com/username/platform-belajar",
+      id: "project-matcha-aquatics",
+      title: "Matcha Aquatics",
+      description: "Matcha Aquatics adalah aplikasi e-catalog modern untuk pengalaman belanja perlengkapan akuatik yang efisien dan interaktif. Dilengkapi integrasi pembayaran Midtrans, perhitungan ongkir RajaOngkir, autentikasi Google OAuth2, serta antarmuka responsif dengan React.js, Tailwind CSS, dan shadcn/ui.",
+      thumbnail: "/img/project/matcha_aquatics.webp",
+      url: "https://github.com/username/matcha-aquatics",
+      githubUrl: "https://github.com/username/matcha-aquatics",
       featured: false,
       order: 1,
-      skills: ["Next.js", "Tailwind CSS", "PostgreSQL"],
+      skills: ["React", "Tailwind CSS", "shadcn/ui"],
     },
     {
-      title: "Aplikasi Catatan",
-      description: "Aplikasi catatan berbasis keyboard dengan sinkronisasi lintas perangkat.",
-      thumbnail: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&q=80",
-      url: null,
-      githubUrl: "https://github.com/username/aplikasi-catatan",
+      id: "project-petra",
+      title: "Petra",
+      description: "Sistem manajemen perpustakaan dengan role-based access control, pengelolaan label salinan buku, kartu anggota, dan ekspor laporan seluruh data di database. Peminjaman buku dikelola otomatis dengan notifikasi pengingat pengembalian lewat integrasi Fonnte API, sehingga menghilangkan human-error dalam pencatatan buku.",
+      thumbnail: "/img/project/petra.webp",
+      url: "https://github.com/username/petra",
+      githubUrl: "https://github.com/username/petra",
       featured: false,
       order: 2,
-      skills: ["React", "TypeScript", "IndexedDB"],
+      skills: ["PHP", "Laravel", "MySQL"],
     },
   ];
 
   for (const project of projects) {
-    const { skills: skillNames, ...data } = project;
-    const id = `project-${slugify(project.title)}`;
+    const { id, skills: skillNames, ...data } = project;
     await prisma.projects.upsert({
       where: { id },
       update: {},
@@ -222,27 +268,52 @@ async function main() {
   // ---- Experiences (dari fallbackExperiences) ----
   const experiences = [
     {
-      id: "experience-frontend-engineer",
-      role: "Frontend Engineer",
-      company: "PT Teknologi Maju",
-      companyUrl: "https://example.com",
-      location: "Jakarta, Indonesia",
-      startDate: new Date("2024-01-01"),
-      endDate: null,
-      current: true,
+      id: "experience-inovindo-digital-media",
+      role: "Backend Web Developer Internship",
+      company: "PT. Inovindo Digital Media",
+      companyUrl: null,
+      location: "Bandung",
+      startDate: new Date("2026-01-01"),
+      endDate: new Date("2026-04-30"),
+      current: false,
       description:
-        "Mengembangkan fitur-fitur frontend untuk produk SaaS, meningkatkan performa halaman hingga 40%, dan membimbing developer junior.",
+        "Mempercepat siklus pengembangan software hingga 35% dan meningkatkan efisiensi waktu hingga 20% dengan merancang schema database yang mendukung replikasi untuk berbagai architecture project.\nMembangun sistem backend dan page builder kustom menggunakan Laravel & Filament untuk 4 perusahaan klien berbeda, dengan architecture dashboard admin yang dapat direplikasi lintas project.\nMerancang struktur frontend agar mudah terintegrasi penuh dengan Filament builder, memastikan setiap halaman kustom tetap SEO-optimized dan responsif.",
     },
     {
-      id: "experience-web-developer",
-      role: "Web Developer",
-      company: "Startup Digital",
+      id: "experience-properti-nusa",
+      role: "Full-stack Developer Freelancer",
+      company: "Properti Nusa",
       companyUrl: null,
-      location: "Bandung, Indonesia",
-      startDate: new Date("2022-06-01"),
-      endDate: new Date("2023-12-31"),
+      location: "Bandung",
+      startDate: new Date("2026-01-01"),
+      endDate: new Date("2026-02-28"),
       current: false,
-      description: "Membangun website dan aplikasi internal untuk klien, dari perancangan hingga deployment.",
+      description:
+        "Memimpin pengembangan platform properti secara end-to-end dari perencanaan architecture, development software menggunakan Laravel, Livewire, dan Tailwind, hingga deployment ke hosting menggunakan C-panel.\nMenyelesaikan permasalahan fragmentasi data dengan membuat platform yang menyimpan semua data yang tersebar pada satu database, serta dilengkapi keamanan modern dengan menerapkan perlindungan CSRF, enkripsi password, dan role-based access untuk membedakan hak akses admin dan pengguna.",
+    },
+    {
+      id: "experience-smk-mahaputra",
+      role: "Backend Web Developer Internship",
+      company: "SMK Mahaputra",
+      companyUrl: null,
+      location: "Bandung",
+      startDate: new Date("2025-09-01"),
+      endDate: new Date("2026-01-31"),
+      current: false,
+      description:
+        "Memberikan solusi atas kasus banyaknya buku yang hilang, serta memperbarui sistem manajemen perpustakaan yang tradisional ke sistem manajemen digital yang dilengkapi pencatatan otomatis dan dapat diekspor ke PDF dan Excel.\nMerancang sistem manajemen perpustakaan yang mendukung fitur role-based access control, pengelolaan label salinan buku, pengelolaan kartu anggota perpustakaan, pengelolaan ekspor laporan pada seluruh data di database.\nMengimplementasikan sistem peminjaman buku yang terkelola secara otomatis dengan notifikasi pengingat tanggal pengembalian otomatis (integrasi Fonnte API), serta 100% menghilangkan human-error dalam sistem pencatatan buku.",
+    },
+    {
+      id: "experience-matcha-aquatics",
+      role: "Full-stack Developer Volunteers",
+      company: "Matcha Aquatics",
+      companyUrl: null,
+      location: "Bandung",
+      startDate: new Date("2025-10-01"),
+      endDate: new Date("2025-12-31"),
+      current: false,
+      description:
+        "Mengembangkan platform point of sale dengan kemampuan menerima multi-order serta mendukung pembayaran otomatis melalui integrasi Midtrans API, dan autentikasi via Google OAuth2 untuk kenyamanan pengguna.\nMembuat tampilan modern dan responsif menggunakan React + Shadcn, serta membuat struktur component yang terorganisir, dengan management state yang optimal, dan menggunakan TypeScript untuk type-safe agar pengelolaan data yang aman.",
     },
   ];
 

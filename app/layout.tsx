@@ -4,7 +4,12 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Footer } from "@/components/layouts/Footer";
 import { Navbar } from "@/components/layouts/Navbar";
 import { ThemeProvider } from "@/components/theme-provider";
-import { siteConfig } from "@/content/site";
+import {
+  siteAuthor,
+  siteConfig,
+  siteKeywords,
+  siteUrl,
+} from "@/content/site";
 import { getSettings } from "@/lib/data";
 import { ClientProviders } from "@/components/layouts/ClientProviders";
 
@@ -20,12 +25,76 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const siteTitle = siteConfig.name;
+const siteDescription = siteConfig.description;
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
-    default: siteConfig.name,
-    template: `%s · ${siteConfig.name}`,
+    default: siteTitle,
+    template: `%s · ${siteTitle}`,
   },
-  description: siteConfig.description,
+  description: siteDescription,
+  keywords: siteKeywords,
+  authors: [{ name: siteAuthor, url: siteUrl }],
+  creator: siteAuthor,
+  publisher: siteAuthor,
+  applicationName: siteTitle,
+  alternates: { canonical: "/" },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "id_ID",
+    url: siteUrl,
+    siteName: siteTitle,
+    title: siteTitle,
+    description: siteDescription,
+    images: [{ url: "/logo.png", width: 512, height: 512, alt: siteTitle }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription,
+    images: ["/logo.png"],
+  },
+  icons: {
+    icon: [{ url: "/logo.png", type: "image/png" }],
+    apple: [{ url: "/logo.png", type: "image/png" }],
+  },
+};
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      name: siteTitle,
+      url: siteUrl,
+      description: siteDescription,
+      inLanguage: "id",
+      author: {
+        "@type": "Person",
+        name: siteAuthor,
+        url: siteUrl,
+      },
+    },
+    {
+      "@type": "Person",
+      name: siteAuthor,
+      url: siteUrl,
+      jobTitle: "Software Engineer",
+      knowsAbout: siteKeywords,
+    },
+  ],
 };
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
@@ -38,6 +107,10 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-background text-foreground">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Navbar settings={settings} />
           <ClientProviders/>
