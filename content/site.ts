@@ -9,7 +9,7 @@ import type {
   SkillsModel,
 } from "@/generated/prisma/models";
 
-export const siteUrl = "https://portofolio.vercel.app";
+export const siteUrl = "https://givaldigumelarsetiawan.vercel.app";
 export const siteAuthor = "Givaldi Gumelar Setiawan";
 export const siteKeywords = [
   "portofolio",
