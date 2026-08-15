@@ -1,7 +1,8 @@
 "use client";
 
-import { MotionSystem } from "../hooks/MotionSystem";
-import { PageTransitionSystem } from "../hooks/PageTransitionSystem";
+import { MotionSystem } from "@/components/hooks/MotionSystem";
+import { PageTransitionSystem } from "@/components/hooks/PageTransitionSystem";
+import GoogleTranslate from "@/components/hooks/GoogleTranslate";
 import FluidCursor from "@/components/sections/FluidContainer"
 import BlockOne from "@/components/background/Blocksone";
 
@@ -11,7 +12,8 @@ export function ClientProviders() {
       <BlockOne/>
       <MotionSystem />
       <PageTransitionSystem />
-      <FluidCursor/>
+      {/* <FluidCursor/> */}
+      <GoogleTranslate/>
     </>
   );
 }

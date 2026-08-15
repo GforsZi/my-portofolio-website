@@ -29,7 +29,6 @@ function BlockOne() {
           13: new Set([2, 4]),
           14: new Set([5]),
           15: new Set([1, 6]),
-          16: new Set([3, 6]),
         }}
       />
     </div>
