@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 
 import { Footer } from "@/components/layouts/Footer";
 import { Navbar } from "@/components/layouts/Navbar";
+import NavLink from "@/components/layouts/NavLink";
 import { ThemeProvider } from "@/components/theme-provider";
 import {
   siteAuthor,
@@ -115,6 +116,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Navbar settings={settings} />
+          <NavLink/>
           <ClientProviders/>
             <main className="flex flex-1 flex-col">{children}</main>
           <Footer settings={settings} />
