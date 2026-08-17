@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react";
+import { useBreadcrumb } from "@/components/layouts/BreadcrumbProvider";
 
 export interface NavItem {
   sectionId: string;
@@ -22,6 +23,7 @@ const defaultItems: NavItem[] = [
   { sectionId: "contact", label: "Contact", href: "#contact" },
 ];
 
+
 export default function NavLink({
   items = defaultItems,
   defaultActiveId = "weapons",
@@ -29,6 +31,7 @@ export default function NavLink({
 }: NavbarProps) {
   const [open, setOpen] = useState(false);
   const [activeId, setActiveId] = useState(defaultActiveId);
+  const { title } = useBreadcrumb();
 
   return (
     <nav
@@ -47,11 +50,11 @@ export default function NavLink({
       </button>
 
       <ul className={`${open ? "block" : "hidden"} lg:block pl-4 text-sm`}>
-        {items.map((item) => {
-          const isActive = item.sectionId === activeId;
+        {title && title.map((title) => {
+          const isActive = title.id === activeId;
           return (
             <li
-              key={item.sectionId}
+              key={title.id}
               data-active={isActive}
               className="flex flex-row-reverse lg:flex-row py-3 items-center lg:justify-start gap-6 relative
                 [&:not(:first-child):not(:last-child)]:after:h-full
@@ -61,14 +64,14 @@ export default function NavLink({
                 text-white uppercase group"
             >
               <a
-                href={item.href}
-                onClick={() => setActiveId(item.sectionId)}
+                href={'#' + title.id}
+                onClick={() => setActiveId(title.id)}
                 className={`before:content-[''] before:absolute before:-bottom-2 before:right-0 lg:before:left-0
                   before:h-[2px] before:w-0 before:bg-white before:transition-all before:duration-500
                   relative font-thin transition-all duration-500
                   ${isActive ? "font-bold before:w-1/2" : ""}`}
               >
-                {item.label}
+                {title.label}
               </a>
             </li>
           );
