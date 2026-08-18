@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Experiences from "@/components/sections/Experiences";
-import Project from "@/components/sections/Project";
+import Project from "@/components/sections/Projects";
 import { SkillsSection } from "@/components/sections/SkillsSection";
 import AboutCard from "@/components/sections/AboutCard";
 import Hero from "@/components/sections/Hero";
@@ -31,9 +31,9 @@ export default async function Home() {
         <Separator />
         <AboutCard settings={settings} />
         <Separator />
-        <Experiences name="pengalaman" experiences={experiences} />
+        <Experiences experiences={experiences} />
       </div>
-        <Project projects={projects} />
+      <Project projects={projects} />
       <Certifications certifications={certifications} />
     </>
   );

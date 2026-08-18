@@ -1,6 +1,8 @@
+"use client"
 import Earth from '@/components/ui/globe';
 import { getSetting } from '@/content/site';
 import type { AppSettingsModel } from '@/generated/prisma/models';
+import { useRegisterBreadcrumb } from "@/hooks/use-register-breadcrumb";
 
 export default function AboutCard({ settings }: { settings: AppSettingsModel[] }) {
   const name = getSetting(settings, 'profile', 'name') ?? '';
@@ -8,9 +10,10 @@ export default function AboutCard({ settings }: { settings: AppSettingsModel[] }
   const bio = getSetting(settings, 'profile', 'bio') ?? '';
   const location = getSetting(settings, 'profile', 'location') ?? '';
   const avatar = getSetting(settings, 'profile', 'avatar') ?? '';
+  useRegisterBreadcrumb("about", "About");
 
   return (
-    <div id="tentang" className='overflow-hidden'>
+    <div id="about" className='overflow-hidden'>
       <article className='w-full overflow-hidden mx-auto mt-6 p-5 border rounded-lg relative'>
         <div className='absolute top-0 left-0 z-[1] h-full w-full bg-background bg-[radial-gradient(#83838352_1px,transparent_1px)] dark:bg-[radial-gradient(#ffffff33_1px,transparent_1px)] bg-[size:20px_20px]'></div>
 

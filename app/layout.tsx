@@ -121,8 +121,8 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
           <BreadcrumbProvider>
             <NavLink/>
             <main className="flex flex-1 flex-col">{children}</main>
+            <Footer settings={settings} />
           </BreadcrumbProvider>
-          <Footer settings={settings} />
         </ThemeProvider>
       </body>
     </html>

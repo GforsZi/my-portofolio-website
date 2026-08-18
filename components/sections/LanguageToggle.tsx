@@ -10,12 +10,12 @@ export default function LanguageToggle() {
   };
 
   return (
-    <div className="flex gap-2">
-      <button onClick={() => changeLanguage('id')} className="text-sm font-medium">
+    <div className="flex mx-2 gap-1">
+      <button onClick={() => changeLanguage('id')} className="text-sm font-medium cursor-pointer">
         ID
       </button>
       <span>|</span>
-      <button onClick={() => changeLanguage('en')} className="text-sm font-medium">
+      <button onClick={() => changeLanguage('en')} className="text-sm font-medium cursor-pointer">
         EN
       </button>
     </div>

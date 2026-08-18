@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-
+import { useRegisterBreadcrumb } from "@/hooks/use-register-breadcrumb";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -95,6 +95,7 @@ function ProjectSlide({ project, direction }: ProjectSlideProps) {
 }
 
 export default function Project({ projects }: { projects: ProjectWithSkills[] }) {
+  useRegisterBreadcrumb("projects", "Projects");
   return (
     <HorizontalScroll
       id="projects"

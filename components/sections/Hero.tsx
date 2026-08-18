@@ -1,6 +1,9 @@
+"use client"
 import Lanyard from "@/components/sections/Lanyard";
+import { useRegisterBreadcrumb } from "@/hooks/use-register-breadcrumb";
 
 export default function Hero() {
+  useRegisterBreadcrumb("hero", "Hero");
   return (
     <div id="hero">
         <Lanyard  
