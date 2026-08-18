@@ -484,6 +484,11 @@ body {
 #google_translate_element {
   display: none;
 }
+.goog-text-highlight {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
 
 
 @media (prefers-reduced-motion: reduce) {

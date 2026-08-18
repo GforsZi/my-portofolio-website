@@ -4,9 +4,10 @@ import Blocks from '@/components/ui/blocks';
 
 function BlockOne() {
   const containerRef = useRef<HTMLDivElement>(null);
+
   return (
     <div
-      className=' fixed inset-0 -z-10 h-screen w-screen overflow-hidden bg-background before:absolute before:z-1 before:h-full before:w-full before:bg-linear-to-t before:from-background before:to-transparent'
+      className='fixed inset-0 -z-10 overflow-hidden bg-background before:absolute before:z-1 before:h-full before:w-full before:bg-linear-to-t before:from-background before:to-transparent'
       ref={containerRef}
     >
       <Blocks

@@ -4,7 +4,7 @@ import { createContext, useContext, useState, useCallback } from "react";
 type BreadcrumbItem = { id: string; label: string };
 
 type BreadcrumbContextType = {
-  items: BreadcrumbItem[];
+  title: BreadcrumbItem[];
   register: (item: BreadcrumbItem) => void;
   unregister: (id: string) => void;
 };
