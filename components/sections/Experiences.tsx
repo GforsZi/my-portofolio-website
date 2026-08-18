@@ -4,6 +4,7 @@ import { Briefcase } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import type { ExperiencesModel } from '@/generated/prisma/models';
+import { useRegisterBreadcrumb } from "@/hooks/use-register-breadcrumb";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,7 +24,6 @@ interface ExperiencesItemProps {
   isLast?: boolean;
 }
 
-// Sub-component timeline item — inline karena cukup ringan untuk digabung
 function ExperiencesItem({ role, company, companyUrl, location, period, description, isLast }: ExperiencesItemProps) {
   return (
     <div className='study-item relative pl-10 pb-10 last:pb-0'>
@@ -60,11 +60,11 @@ function ExperiencesItem({ role, company, companyUrl, location, period, descript
 }
 
 interface ExperiencesProps {
-  name: string;
   experiences: ExperiencesModel[];
 }
 
-function Experiences({ name, experiences }: ExperiencesProps) {
+function Experiences({ experiences }: ExperiencesProps) {
+  useRegisterBreadcrumb("experiences", "Experiences");
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -137,7 +137,7 @@ function Experiences({ name, experiences }: ExperiencesProps) {
   if (experiences.length === 0) return null;
 
   return (
-    <section id={name} ref={sectionRef} className=' flex flex-col items-center justify-center pt-8 px-4 pb-16'>
+    <section id="experiences" ref={sectionRef} className=' flex flex-col items-center justify-center pt-8 px-4 pb-16'>
       <h2  className='study-heading sm:text-7xl pb-10 text-5xl font-semibold text-center bg-gradient-to-b from-foreground to-muted-foreground bg-clip-text text-transparent leading-[100%] tracking-tighter'>
         Experiences
       </h2>

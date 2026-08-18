@@ -462,7 +462,6 @@
     background-color: #f9fafb;
 }
 
-/* Link */
 .rich-content a {
     color: #3b82f6;
     text-decoration: underline;
@@ -470,6 +469,25 @@
 
 .rich-content a:hover {
     color: #1d4ed8;
+}
+
+.goog-te-banner-frame,
+.goog-te-gadget-icon {
+  display: none !important;
+}
+body {
+  top: 0px !important; 
+}
+.skiptranslate {
+  display: none;
+}
+#google_translate_element {
+  display: none;
+}
+.goog-text-highlight {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
 }
 
 

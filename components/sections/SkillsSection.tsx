@@ -3,8 +3,8 @@
 import type { CSSProperties } from "react";
 import type { SkillWithCategory } from "@/content/site";
 import LogoLoop, { type LogoItem } from "@/components/ui/logo-loop";
+import { useRegisterBreadcrumb } from "@/hooks/use-register-breadcrumb";
 
-// Marquee atas: bahasa pemrograman, framework, library, database.
 const UP_CATEGORIES = [
   "skill-category-bahasa",
   "skill-category-framework",
@@ -12,7 +12,6 @@ const UP_CATEGORIES = [
   "skill-category-database",
 ];
 
-// Marquee bawah: tools, OS, CLI utility.
 const DOWN_CATEGORIES = [
   "skill-category-tools",
   "skill-category-os",
@@ -28,8 +27,6 @@ const toLogoItems = (skills: SkillWithCategory[]): LogoItem[] =>
     height: 24,
   }));
 
-// SVG dimuat sebagai mask dan diisi warna currentColor sehingga mengikuti
-// warna teks tema (light/dark) tanpa perlu mengubah file SVG-nya.
 function SkillLogo({ src, alt }: { src: string; alt: string }) {
   const style: CSSProperties = {
     display: "inline-block",
@@ -64,6 +61,8 @@ const renderSkillLogo = (item: LogoItem) => {
 };
 
 export function SkillsSection({ skills }: { skills: SkillWithCategory[] }) {
+  useRegisterBreadcrumb("skill", "Skill");
+
   const upLogos = toLogoItems(
     skills.filter((skill) => UP_CATEGORIES.includes(skill.skillCategoryId)),
   );
@@ -74,7 +73,7 @@ export function SkillsSection({ skills }: { skills: SkillWithCategory[] }) {
   if (upLogos.length === 0 && downLogos.length === 0) return null;
 
   return (
-    <section id="keahlian">
+    <section id="skill">
       <div style={{ height: "75px", position: "relative", overflow: "hidden" }}>
         <LogoLoop
           logos={upLogos}

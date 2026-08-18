@@ -13,6 +13,7 @@ import HorizontalScroll, {
   type HorizontalScrollDirection,
 } from "@/components/ui/horizontal-scroll";
 import type { CertificationsModel } from "@/generated/prisma/models";
+import { useRegisterBreadcrumb } from "@/hooks/use-register-breadcrumb";
 
 type CertificationCardProps = {
   cert: CertificationsModel;
@@ -77,9 +78,10 @@ function CertificationCard({ cert, direction }: CertificationCardProps) {
 
 export default function Certifications({ certifications }: { certifications: CertificationsModel[] }) {
   if (certifications.length === 0) return null;
+  useRegisterBreadcrumb("certifications", "Certifications");
 
   return (
-    <HorizontalScroll id="sertifikat" heading="Certifications">
+    <HorizontalScroll id="certifications" heading="Certifications">
       {(direction) =>
         certifications.map((cert) => (
           <CertificationCard

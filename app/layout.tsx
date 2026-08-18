@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 
 import { Footer } from "@/components/layouts/Footer";
 import { Navbar } from "@/components/layouts/Navbar";
+import { BreadcrumbProvider } from "@/components/layouts/BreadcrumbProvider";
+import NavLink from "@/components/layouts/NavLink";
 import { ThemeProvider } from "@/components/theme-provider";
 import {
   siteAuthor,
@@ -15,14 +17,16 @@ import { ClientProviders } from "@/components/layouts/ClientProviders";
 
 import "./globals.css";
 
-const geistSans = Geist({
+const geistSans = localFont({
+  src: "./fonts/Geist-Variable.woff2",
   variable: "--font-sans",
-  subsets: ["latin"],
+  weight: "100 900",
 });
 
-const geistMono = Geist_Mono({
+const geistMono = localFont({
+  src: "./fonts/GeistMono-Variable.woff2",
   variable: "--font-mono",
-  subsets: ["latin"],
+  weight: "100 900",
 });
 
 const siteTitle = siteConfig.name;
@@ -114,8 +118,11 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Navbar settings={settings} />
           <ClientProviders/>
+          <BreadcrumbProvider>
+            <NavLink/>
             <main className="flex flex-1 flex-col">{children}</main>
-          <Footer settings={settings} />
+            <Footer settings={settings} />
+          </BreadcrumbProvider>
         </ThemeProvider>
       </body>
     </html>

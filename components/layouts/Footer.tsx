@@ -5,6 +5,7 @@ import Link from "next/link";
 import { getSetting } from "@/content/site";
 import type { AppSettingsModel } from "@/generated/prisma/models";
 import { useEffect, useRef } from "react";
+import { useRegisterBreadcrumb } from "@/hooks/use-register-breadcrumb";
 
 const email = "givaldigumelarsetiawan@gmail.com";
 const marqueeRows = [
@@ -39,6 +40,7 @@ const baseRows = [
 ];
 
 export function Footer({ settings }: { settings: AppSettingsModel[] }) {
+  useRegisterBreadcrumb("contact", "Contact");
   const siteName = getSetting(settings, "site", "name") ?? "Portofolio";
   const socials = {
     github: getSetting(settings, "social", "github") ?? "#",
@@ -161,7 +163,7 @@ export function Footer({ settings }: { settings: AppSettingsModel[] }) {
   }, []);
   return (
 
-    <footer
+    <footer id="contact"
       className="site-footer relative overflow-hidden border-t px-4 pb-20 md:px-8 md:pb-34"
     >
     {/* <footer className="border-t bg-background"> */}
