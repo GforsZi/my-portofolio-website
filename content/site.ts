@@ -31,10 +31,10 @@ export const siteConfig = {
   name: "Portofolio (eary access)",
   description: "Personal portfolio built with Next.js, Tailwind CSS, shadcn/ui, and Prisma.",
   navLinks: [
-    { href: "/proyek", label: "Proyek" },
-    { href: "/#tentang", label: "Tentang" },
-    { href: "/#pengalaman", label: "Pengalaman" },
-    { href: "/#keahlian", label: "Keahlian" },
+    { href: "/", label: "Welcome" },
+    { href: "/settings", label: "Setting" },
+    { href: "/pengalaman", label: "Pengalaman" },
+    { href: "/keahlian", label: "Keahlian" },
   ],
   socials: {
     github: "https://github.com/username",
