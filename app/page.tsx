@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import Experiences from "@/components/sections/Experiences";
+import { Footer } from "@/components/layouts/Footer";
+import { Navbar } from "@/components/layouts/Navbar";
+import { BreadcrumbProvider } from "@/components/layouts/BreadcrumbProvider";
+import NavLink from "@/components/layouts/NavLink";
 import Project from "@/components/sections/Projects";
 import { SkillsSection } from "@/components/sections/SkillsSection";
 import AboutCard from "@/components/sections/AboutCard";
@@ -24,17 +28,22 @@ export default async function Home() {
 
 
   return (
-    <>
-      <Hero/>
-      <SkillsSection skills={skills} />
-      <div className="mx-auto flex w-full max-w-3xl flex-col gap-12 px-4 py-16 sm:px-8">
-        <Separator />
-        <AboutCard settings={settings} />
-        <Separator />
-        <Experiences experiences={experiences} />
-      </div>
-      <Project projects={projects} />
-      <Certifications certifications={certifications} />
+   <>
+      <Navbar settings={settings} />
+      <BreadcrumbProvider>
+        <NavLink/>
+        <Hero/>
+        <SkillsSection skills={skills} />
+        <div className="mx-auto flex w-full max-w-3xl flex-col gap-12 px-4 py-16 sm:px-8">
+          <Separator />
+          <AboutCard settings={settings} />
+          <Separator />
+          <Experiences experiences={experiences} />
+        </div>
+        <Project projects={projects} />
+        <Certifications certifications={certifications} />
+        <Footer settings={settings} />
+      </BreadcrumbProvider>
     </>
   );
 }

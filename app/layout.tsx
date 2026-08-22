@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 
-import { Footer } from "@/components/layouts/Footer";
-import { Navbar } from "@/components/layouts/Navbar";
-import { BreadcrumbProvider } from "@/components/layouts/BreadcrumbProvider";
-import NavLink from "@/components/layouts/NavLink";
 import { ThemeProvider } from "@/components/theme-provider";
 import {
   siteAuthor,
@@ -102,7 +98,6 @@ const structuredData = {
 };
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
-  const settings = await getSettings();
 
   return (
     <html
@@ -116,13 +111,8 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <Navbar settings={settings} />
           <ClientProviders/>
-          <BreadcrumbProvider>
-            <NavLink/>
-            <main className="flex flex-1 flex-col">{children}</main>
-            <Footer settings={settings} />
-          </BreadcrumbProvider>
+          <main className="flex flex-1 flex-col">{children}</main>
         </ThemeProvider>
       </body>
     </html>
